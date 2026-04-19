@@ -1,0 +1,37 @@
+/* ─── index.css — Home page only ────────────────────────── */
+
+.hero {
+  padding: 0 var(--h-pad);
+  margin-top: 8px;
+  flex: 1; /* pushes footer to bottom on short viewports */
+}
+
+.hero__inner {
+  /* Figma: image offset ~12% from left, width 75% of content area */
+  margin-left: 12%;
+  width: 75%;
+}
+
+.hero__inner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Tablet ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero { margin-top: 0; }
+
+  .hero__inner {
+    margin-left: 8%;
+    width: 84%;
+  }
+}
+
+/* ─── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero__inner {
+    margin-left: 0;
+    width: 100%;
+  }
+}

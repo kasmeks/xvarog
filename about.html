@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>about — xvarog</title>
+  <meta name="description" content="xvarog is a Ukrainian jeweller completing her apprenticeship at the world's first jewellery school in Pforzheim, founded 1768." />
+  <meta property="og:title"       content="about — xvarog" />
+  <meta property="og:description" content="xvarog — handmade jewellery. Made with intention." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="images/about-photo.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/about.css" />
+</head>
+<body>
+
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
+    <a href="about.html"   onclick="closeMenu()">about</a>
+    <a href="shop.html"    onclick="closeMenu()">shop</a>
+    <a href="custom.html"  onclick="closeMenu()">custom</a>
+    <a href="archive.html" onclick="closeMenu()">archive</a>
+  </div>
+
+  <div class="page">
+
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__left">
+        <a href="about.html" class="nav--active">about</a>
+        <a href="shop.html">shop</a>
+      </div>
+      <div class="nav__logo">
+        <a href="index.html">
+          <img src="images/logo.png"
+               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/0d5a151f-5710-4a70-8cc4-cb53065fc909'"
+               alt="xvarog" />
+        </a>
+      </div>
+      <div class="nav__right">
+        <a href="custom.html">custom</a>
+        <a href="archive.html">archive</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn"
+              aria-label="Open navigation menu"
+              aria-expanded="false" aria-controls="mobileNav"
+              onclick="openMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <main class="about">
+
+      <div class="about__text">
+        <div class="about__text-top">
+          <p>
+            <span class="about__brand">xvarog</span>
+            (from Slavic: Svarog, god of metalsmithing) is a Ukrainian jeweller completing her apprenticeship at the world's first jewellery school, founded in Pforzheim in 1768.
+          </p>
+          <p>The focus of her work is combining different materials, such as metals, wood, minerals, leather, and ethically sourced animal elements, into wearable pieces.</p>
+          <p>The philosophy of xvarog is a conscious return to pre-industrial craft, to the way jewellery was made when time and skill were woven into each piece. Every decision is intentional, every change takes time. It is the belief that the value of a piece lives in the hours and hands it took to make it.</p>
+        </div>
+        <div class="about__spacer"></div>
+        <div class="about__text-bottom">
+          <p>All animal materials are ethically sourced and treated with care to give them a second life. Only one of a kind pieces, entirely handmade by one person.</p>
+        </div>
+      </div>
+
+      <div class="about__image">
+        <img src="images/about-photo.jpg"
+             onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/fb87af42-e2d0-4477-ad79-63496a4447bf'"
+             alt="xvarog jewellery piece — fur and metal bracelet" />
+      </div>
+
+    </main>
+
+    <div class="separator" role="separator"></div>
+
+    <footer class="footer">
+      <a href="care.html"     class="footer__item">CARE</a>
+      <a href="shipping.html" class="footer__item">SHIPPING AND RETURNS</a>
+      <a href="terms.html"    class="footer__item">TERMS AND CONDITIONS</a>
+      <span class="footer__item">© XVAROG 2026</span>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

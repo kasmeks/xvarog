@@ -1,0 +1,26 @@
+/* ─── placeholder.css — Shop and Custom placeholder pages ── */
+
+.placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px var(--h-pad);
+  gap: 16px;
+  color: var(--color-text);
+}
+
+.placeholder__title {
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+}
+
+.placeholder__sub {
+  font-size: 13px;
+  font-weight: var(--fw-normal);
+  color: var(--color-text);
+}

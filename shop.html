@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shop — xvarog</title>
+  <meta name="description" content="xvarog shop — handmade jewellery pieces available to purchase." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/placeholder.css" />
+</head>
+<body>
+
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
+    <a href="about.html"   onclick="closeMenu()">about</a>
+    <a href="shop.html"    onclick="closeMenu()">shop</a>
+    <a href="custom.html"  onclick="closeMenu()">custom</a>
+    <a href="archive.html" onclick="closeMenu()">archive</a>
+  </div>
+
+  <div class="page">
+
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__left">
+        <a href="about.html">about</a>
+        <a href="shop.html" class="nav--active">shop</a>
+      </div>
+      <div class="nav__logo">
+        <a href="index.html">
+          <img src="images/logo.png"
+               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/0d5a151f-5710-4a70-8cc4-cb53065fc909'"
+               alt="xvarog" />
+        </a>
+      </div>
+      <div class="nav__right">
+        <a href="custom.html">custom</a>
+        <a href="archive.html">archive</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn"
+              aria-label="Open navigation menu"
+              aria-expanded="false" aria-controls="mobileNav"
+              onclick="openMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <main class="placeholder">
+      <p class="placeholder__title">Shop</p>
+      <p class="placeholder__sub">Coming soon</p>
+    </main>
+
+    <div class="separator" role="separator"></div>
+
+    <footer class="footer">
+      <a href="care.html"     class="footer__item">CARE</a>
+      <a href="shipping.html" class="footer__item">SHIPPING AND RETURNS</a>
+      <a href="terms.html"    class="footer__item">TERMS AND CONDITIONS</a>
+      <span class="footer__item">© XVAROG 2026</span>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
