@@ -157,7 +157,7 @@
     .nav__hamburger span {
       display: block;
       width: 24px;
-      height: 1.5px;
+      height: 2px;
       background: var(--color-text);
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
@@ -339,14 +339,16 @@
         --nav-height: 65px;
       }
 
-      .about { gap: 28px; padding-top: 24px; }
+      .about { gap: 28px; padding-top: var(--h-pad); }
 
       .footer {
         flex-direction: column;
         align-items: flex-start;
         gap: 14px;
-        padding-bottom: 32px;
+        padding-bottom: 20px;
       }
+
+      .separator { margin: 40px 0 0; }
 
       .mobile-nav a { font-size: 1.5rem; }
     }
@@ -357,10 +359,10 @@
   <!-- Mobile nav overlay -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
-    <a href="about.html" onclick="closeMenu()">about</a>
-    <a href="shop.html" onclick="closeMenu()">shop</a>
-    <a href="custom.html" onclick="closeMenu()">custom</a>
-    <a href="archive.html" onclick="closeMenu()">archive</a>
+    <a href="/about" onclick="closeMenu()">about</a>
+    <a href="/shop" onclick="closeMenu()">shop</a>
+    <a href="/custom" onclick="closeMenu()">custom</a>
+    <a href="/archive" onclick="closeMenu()">archive</a>
   </div>
 
   <div class="page">
@@ -369,20 +371,20 @@
     <nav class="nav" aria-label="Main navigation">
 
       <div class="nav__left">
-        <a href="about.html" class="nav--active">about</a>
-        <a href="shop.html">shop</a>
+        <a href="/about" class="nav--active">about</a>
+        <a href="/shop">shop</a>
       </div>
 
          <div class="nav__logo">
-        <a href="index.html"><img
+        <a href="/"><img
           src="https://kasmeks.github.io/xvarog/images/logo.png"
           alt="xvarog logo"
         /></a>
       </div>
 
       <div class="nav__right">
-        <a href="custom.html">custom</a>
-        <a href="archive.html">archive</a>
+        <a href="/custom">custom</a>
+        <a href="/archive">archive</a>
       </div>
 
       <button
@@ -438,9 +440,9 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <a href="care.html" class="footer__item">CARE</a>
-      <a href="shipping.html" class="footer__item">SHIPPING AND RETURNS</a>
-      <a href="terms.html" class="footer__item">TERMS AND CONDITIONS</a>
+      <a href="/care" class="footer__item">CARE</a>
+      <a href="/shipping" class="footer__item">SHIPPING AND RETURNS</a>
+      <a href="/terms" class="footer__item">TERMS AND CONDITIONS</a>
       <span class="footer__item">© XVAROG 2026</span>
     </footer>
 
