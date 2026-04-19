@@ -24,9 +24,9 @@
       --logo-size:       35px;
       --nav-gap:         90px;    /* gap between nav link pairs */
 
-      --max-width:       1440px;
       --h-pad:           80px;    /* horizontal padding inside page */
       --nav-height:      85px;    /* matches padding 28px top+bottom + ~29px content */
+      --hero-top-pad:    20px;    /* top padding for hero section on desktop */
     }
 
     /* ─── Reset ─────────────────────────────────────────────── */
@@ -147,9 +147,7 @@
 
     /* ─── Hero image ─────────────────────────────────────────── */
     .hero {
-      padding: 0 var(--h-pad);
-      padding-top: var(--h-pad);
-      margin-top: 0;
+      padding: var(--hero-top-pad) var(--h-pad) 0;
       flex: 1; /* grows to fill space, pushing footer down */
     }
 
@@ -223,12 +221,12 @@
       line-height: 1;
     }
 
-    /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
     @media (max-width: 1024px) {
       :root {
         --h-pad:      40px;
         --fs-nav:     16px;
         --nav-height: 69px;
+        --hero-top-pad: 40px;    /* top padding for hero section on mobile/tablet */
       }
 
       .nav__left,

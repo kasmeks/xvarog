@@ -370,7 +370,13 @@
         object-fit: cover;
       }
 
-      .archive__left-bottom { margin-top: 28px; padding-right: 0; }
+      .archive__left-bottom { margin-top: 0; padding-right: 0; }
+
+      /* Align captions to left on mobile for consistency */
+      .archive__caption--right { text-align: left; }
+
+      /* Make internal gap in left column match grid gap for uniform spacing */
+      .archive__left { gap: 40px; }
 
       .footer {
         flex-direction: column;
