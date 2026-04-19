@@ -4,71 +4,455 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>archive — xvarog</title>
-  <meta name="description" content="xvarog archive — past collections and one-of-a-kind pieces." />
-  <meta property="og:title"       content="archive — xvarog" />
-  <meta property="og:description" content="Past collections by xvarog." />
-  <meta property="og:type"        content="website" />
-  <meta property="og:image"       content="images/archive-keychain.JPG" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/shared.css" />
-  <link rel="stylesheet" href="css/archive.css" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────── */
+    :root {
+      --color-bg:        #ffffff;
+      --color-text:      rgba(0, 0, 0, 0.75);
+      --color-text-dark: #000000;
+      --color-text-year: #82808d;
+      --color-separator: rgba(0, 0, 0, 0.08);
+      --color-border:    rgba(0, 0, 0, 0.08);
+
+      --font:            'Inter', sans-serif;
+      --fw-normal:       400;
+      --fw-semibold:     600;
+
+      --fs-nav:          14px;
+      --fs-caption:      13px;
+      --fs-footer:       12px;
+
+      --logo-size:       35px;
+      --nav-gap:         90px;
+
+      --max-width:       1440px;
+      --h-pad:           80px;
+      --nav-height:      85px;
+
+      /* Figma grid proportions (out of 1720px content width):
+         Left col:  100px → 897px wide  → 897/1720 ≈ 52.15%
+         Gap:       897+100 = 997 → right col starts at 1043px → gap = 1043-997 = 46px → 46/1720 ≈ 2.67%
+         Right col: 777px wide → 777/1720 ≈ 45.17%
+      */
+      --col-gap:        2.67%;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-bg);
+      font-family: var(--font);
+      font-weight: var(--fw-normal);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Page wrapper ───────────────────────────────────────── */
+    .page {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      background: var(--color-bg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--nav-height);
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--max-width);
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad);
+      font-size: var(--fs-nav);
+      color: var(--color-text);
+    }
+
+    .nav__left {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+      flex: 1;
+    }
+
+    .nav__logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: var(--logo-size);
+      height: var(--logo-size);
+      flex-shrink: 0;
+    }
+
+    .nav__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .nav__left a,
+    .nav__right a {
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav__left a:hover,
+    .nav__right a:hover { opacity: 0.5; }
+
+    .nav--active {
+      font-weight: var(--fw-semibold);
+      color: var(--color-text-dark);
+    }
+
+    /* Hamburger */
+    .nav__hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--color-text);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ─── Archive grid ───────────────────────────────────────── */
+    /*
+      Figma pixel values on 1920px canvas:
+        Left col:  left 100px, width 897px
+        Gap:       46px  (right col starts at 1043px)
+        Right col: width 777px
+
+      Left col contains:
+        - Landscape image 897×672px (ratio 3996:2997 ≈ 4:3) + 12px gap + 16px caption
+        - 23px gap between items
+        - Portrait image 608×456px + 12px gap + 16px caption
+
+      Right col contains:
+        - Tall portrait image 777×(777×4096/2706)px (ratio 2706:4096) + 12px gap + 16px caption
+        The image fills exactly the height of both left images combined.
+
+      Strategy: CSS Grid with column widths matching Figma ratios.
+      Right col image uses object-fit:cover + fixed height derived from
+      left col total height, computed via aspect-ratio on a wrapper.
+      Since we can't sync heights cross-column in pure CSS without JS,
+      we use the right image's natural aspect ratio inside a wrapper
+      that stretches to fill via align-items:stretch on the grid.
+    */
+
+    /* Outer grid: two columns + gap */
+    .archive {
+      display: grid;
+      grid-template-columns: 897fr 777fr;
+      gap: 0 46px;
+      padding: 40px var(--h-pad) 0;
+      align-items: start;
+      flex: 1; /* pushes footer down */
+    }
+
+    /* ── Left column ── */
+    .archive__left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .archive__item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .archive__item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Gap between the two left items — from Figma:
+       landscape bottom: top 161 + height 672 + 12 caption-gap + 16 caption = 861px
+       wild boar top: 880px → inter-item gap = 880 - 861 = 19px (before the item div)
+       We add this as margin-top on the second item */
+    .archive__left-bottom {
+      margin-top: 19px;
+      padding-right: 200px;
+    }
+
+    /* Caption */
+    .archive__caption {
+      font-size: var(--fs-caption);
+      line-height: 16px;
+      color: var(--color-text-dark);
+    }
+
+    .archive__caption--right { text-align: right; }
+    .archive__caption--left  { text-align: left; }
+
+    .archive__caption .year { color: var(--color-text-year); }
+
+    /* ── Right column ── */
+    /* The right column is a grid cell that stretches to the row height.
+       We make the image wrapper fill all available height so the tall
+       portrait matches the combined height of the left column. */
+    .archive__right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      /* Stretch to match left column height */
+      align-self: stretch;
+    }
+
+    /* Image wrapper fills all remaining height after caption */
+    .archive__right__img-wrap {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .archive__right__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* ─── Separator ──────────────────────────────────────────── */
+    .separator {
+      height: 1px;
+      background: var(--color-separator);
+      margin: 80px 0 0;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad) 40px;
+      font-size: var(--fs-footer);
+      color: var(--color-text);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__item { white-space: nowrap; }
+
+    /* ─── Mobile menu overlay ────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav a {
+      font-size: 1.8rem;
+      color: var(--color-text);
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      :root {
+        --h-pad:      40px;
+        --fs-nav:     16px;
+        --nav-height: 69px;
+      }
+
+      .nav__left,
+      .nav__right { display: none; }
+
+      .nav__logo {
+        position: static;
+        transform: none;
+      }
+
+      .nav__hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+
+      .nav { justify-content: space-between; padding: 20px var(--h-pad); }
+
+      /* Tighten column gap on tablet */
+      .archive { gap: 0 28px; flex: 1; }
+    }
+
+    /* ─── Mobile (≤ 768px) ───────────────────────────────────── */
+    @media (max-width: 768px) {
+      :root {
+        --h-pad:      20px;
+        --fs-caption: 13px;
+        --fs-footer:  11px;
+        --nav-height: 65px;
+      }
+
+      .archive {
+        grid-template-columns: 1fr;
+        gap: 40px 0;
+        padding-top: 28px;
+        flex: none;
+      }
+
+      .archive__right { align-self: auto; }
+
+      .archive__right__img-wrap {
+        flex: none;
+        height: auto;
+      }
+
+      .archive__right__img-wrap img {
+        height: auto;
+        object-fit: cover;
+      }
+
+      .archive__left-bottom { margin-top: 28px; }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding-bottom: 32px;
+      }
+
+      .mobile-nav a { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Mobile nav overlay -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
-    <a href="about.html"   onclick="closeMenu()">about</a>
-    <a href="shop.html"    onclick="closeMenu()">shop</a>
-    <a href="custom.html"  onclick="closeMenu()">custom</a>
+    <a href="about.html" onclick="closeMenu()">about</a>
+    <a href="shop.html" onclick="closeMenu()">shop</a>
+    <a href="custom.html" onclick="closeMenu()">custom</a>
     <a href="archive.html" onclick="closeMenu()">archive</a>
   </div>
 
   <div class="page">
 
+    <!-- Nav -->
     <nav class="nav" aria-label="Main navigation">
+
       <div class="nav__left">
         <a href="about.html">about</a>
         <a href="shop.html">shop</a>
       </div>
-      <div class="nav__logo">
-        <a href="index.html">
-          <img src="images/logo.png"
-               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/0d5a151f-5710-4a70-8cc4-cb53065fc909'"
-               alt="xvarog" />
-        </a>
+
+   <div class="nav__logo">
+        <a href="index.html"><img
+          src="https://raw.githubusercontent.com/kasmeks/xvarog/main/images/logo.png"
+          alt="xvarog logo"
+        /></a>
       </div>
+
       <div class="nav__right">
         <a href="custom.html">custom</a>
         <a href="archive.html" class="nav--active">archive</a>
       </div>
-      <button class="nav__hamburger" id="hamburgerBtn"
-              aria-label="Open navigation menu"
-              aria-expanded="false" aria-controls="mobileNav"
-              onclick="openMenu()">
-        <span></span><span></span><span></span>
+
+      <button
+        class="nav__hamburger"
+        id="hamburgerBtn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobileNav"
+        onclick="openMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
+
     </nav>
 
+    <!-- Archive grid -->
     <main class="archive">
 
+      <!-- Left column -->
       <div class="archive__left">
 
+        <!-- Top item: landscape image, caption right-aligned -->
         <div class="archive__item">
-          <img src="images/archive-keychain.jpg"
-               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/5ae54174-0dd9-4def-9b24-1a2a05b47ddc'"
-               alt="KEYCHAIN — xvarog 2025" />
+          <img
+            src="https://raw.githubusercontent.com/kasmeks/xvarog/main/images/archive-keychain.jpg"
+            alt="KEYCHAIN — xvarog 2025"
+          />
           <p class="archive__caption archive__caption--right">
             KEYCHAIN, <span class="year">2025</span>
           </p>
         </div>
 
+        <!-- Bottom item: smaller portrait image, caption left-aligned -->
         <div class="archive__item archive__left-bottom">
-          <img src="images/archive-wildboar.jpg"
-               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/b0d667ed-c42c-45c2-88ff-1f06f56e85d4'"
-               alt="WILD BOAR (KEYCHAIN) — xvarog 2025" />
+          <img
+            src="https://raw.githubusercontent.com/kasmeks/xvarog/main/images/archive-wildboar.jpg"
+            alt="WILD BOAR (KEYCHAIN) — xvarog 2025"
+          />
           <p class="archive__caption archive__caption--left">
             WILD BOAR (KEYCHAIN), <span class="year">2025</span>
           </p>
@@ -76,11 +460,13 @@
 
       </div>
 
+      <!-- Right column: single tall portrait stretching to match left column height -->
       <div class="archive__right">
         <div class="archive__right__img-wrap">
-          <img src="images/archive-extension.jpg"
-               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/195b11d3-1983-432e-ac85-d3473d457f64'"
-               alt="EXTENSION — xvarog 2026" />
+          <img
+            src="https://raw.githubusercontent.com/kasmeks/xvarog/main/images/archive-extension.jpg"
+            alt="EXTENSION — xvarog 2026"
+          />
         </div>
         <p class="archive__caption archive__caption--left">
           EXTENSION, <span class="year">2026</span>
@@ -89,17 +475,40 @@
 
     </main>
 
+    <!-- Separator -->
     <div class="separator" role="separator"></div>
 
+    <!-- Footer -->
     <footer class="footer">
-      <a href="care.html"     class="footer__item">CARE</a>
+      <a href="care.html" class="footer__item">CARE</a>
       <a href="shipping.html" class="footer__item">SHIPPING AND RETURNS</a>
-      <a href="terms.html"    class="footer__item">TERMS AND CONDITIONS</a>
+      <a href="terms.html" class="footer__item">TERMS AND CONDITIONS</a>
       <span class="footer__item">© XVAROG 2026</span>
     </footer>
 
   </div>
 
-  <script src="js/main.js"></script>
+  <script>
+    function openMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+
 </body>
 </html>

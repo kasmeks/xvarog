@@ -3,74 +3,378 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xvarog — handmade jewellery</title>
-  <meta name="description" content="xvarog — handmade jewellery combining metals, wood, minerals, leather and ethically sourced materials. Based in Pforzheim." />
-  <meta property="og:title"       content="xvarog" />
-  <meta property="og:description" content="Handmade jewellery. Made with intention." />
-  <meta property="og:type"        content="website" />
-  <meta property="og:image"       content="images/hero.jpg" />
-
+  <title>xvarog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/shared.css" />
-  <link rel="stylesheet" href="css/index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────── */
+    :root {
+      --color-bg:        #ffffff;
+      --color-text:      rgba(0, 0, 0, 0.75);
+      --color-separator: rgba(0, 0, 0, 0.08);
+      --color-border:    rgba(0, 0, 0, 0.08);
+
+      --font:            'Inter', sans-serif;
+      --fw-normal:       400;
+
+      --fs-nav:          14px;
+      --fs-footer:       12px;
+
+      --logo-size:       35px;
+      --nav-gap:         90px;    /* gap between nav link pairs */
+
+      --max-width:       1440px;
+      --h-pad:           80px;    /* horizontal padding inside page */
+      --nav-height:      85px;    /* matches padding 28px top+bottom + ~29px content */
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-bg);
+      font-family: var(--font);
+      font-weight: var(--fw-normal);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Page wrapper ───────────────────────────────────────── */
+    .page {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      background: var(--color-bg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      /* Space below nav so content is not hidden behind fixed bar */
+      padding-top: var(--nav-height);
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────── */
+    /* Fixed on all screen sizes so it stays on top when scrolling */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--max-width);
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad);
+      font-size: var(--fs-nav);
+    }
+
+    /* Left group: about + shop */
+    .nav__left {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+      flex: 1;
+    }
+
+    /* Logo — absolutely centered within nav */
+    .nav__logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: var(--logo-size);
+      height: var(--logo-size);
+      flex-shrink: 0;
+    }
+
+    .nav__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Right group: custom + archive */
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .nav__left a,
+    .nav__right a {
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav__left a:hover,
+    .nav__right a:hover { opacity: 0.5; }
+
+    /* Hamburger — hidden on desktop */
+    .nav__hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--color-text);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ─── Hero image ─────────────────────────────────────────── */
+    .hero {
+      padding: 0 var(--h-pad);
+      margin-top: 8px;
+      flex: 1; /* grows to fill space, pushing footer down */
+    }
+
+    .hero__inner {
+      /* Figma: image starts at ~286/1920 ≈ 15% from left, width 1349/1920 ≈ 70% of canvas */
+      margin-left: 12%;
+      width: 75%;
+    }
+
+    .hero__inner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ─── Separator ──────────────────────────────────────────── */
+    .separator {
+      height: 1px;
+      background: var(--color-separator);
+      margin: 80px 0 0;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad) 40px;
+      font-size: var(--fs-footer);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__item { white-space: nowrap; }
+
+    /* ─── Mobile menu overlay ────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav a {
+      font-size: 1.8rem;
+      color: var(--color-text);
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      :root {
+        --h-pad:      40px;
+        --fs-nav:     16px;
+        --nav-height: 69px;
+      }
+
+      .nav__left,
+      .nav__right { display: none; }
+
+      .nav__logo {
+        position: static;
+        transform: none;
+      }
+
+      .nav__hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+
+      .nav {
+        justify-content: space-between;
+        padding: 20px var(--h-pad);
+      }
+
+      .hero { margin-top: 0; }
+
+      .hero__inner {
+        margin-left: 8%;
+        width: 84%;
+      }
+    }
+
+    /* ─── Mobile (≤ 768px) ───────────────────────────────────── */
+    @media (max-width: 768px) {
+      :root {
+        --h-pad:      20px;
+        --fs-footer:  11px;
+        --nav-height: 65px;
+      }
+
+      .hero__inner {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding-bottom: 32px;
+      }
+
+      .mobile-nav a { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Mobile nav overlay -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
-    <a href="about.html"   onclick="closeMenu()">about</a>
-    <a href="shop.html"    onclick="closeMenu()">shop</a>
-    <a href="custom.html"  onclick="closeMenu()">custom</a>
+    <a href="about.html" onclick="closeMenu()">about</a>
+    <a href="shop.html" onclick="closeMenu()">shop</a>
+    <a href="custom.html" onclick="closeMenu()">custom</a>
     <a href="archive.html" onclick="closeMenu()">archive</a>
   </div>
 
   <div class="page">
 
+    <!-- Nav -->
     <nav class="nav" aria-label="Main navigation">
+
+      <!-- Left: about + shop -->
       <div class="nav__left">
         <a href="about.html">about</a>
         <a href="shop.html">shop</a>
       </div>
+
+      <!-- Center logo (absolutely centered) -->
       <div class="nav__logo">
-        <a href="index.html">
-          <img src="images/logo.png"
-               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/0d5a151f-5710-4a70-8cc4-cb53065fc909'"
-               alt="xvarog" />
-        </a>
+        <a href="index.html"><img
+          src="https://raw.githubusercontent.com/kasmeks/xvarog/main/images/logo.png"
+          alt="xvarog logo"
+        /></a>
       </div>
+
+      <!-- Right: custom + archive -->
       <div class="nav__right">
         <a href="custom.html">custom</a>
         <a href="archive.html">archive</a>
       </div>
-      <button class="nav__hamburger" id="hamburgerBtn"
-              aria-label="Open navigation menu"
-              aria-expanded="false" aria-controls="mobileNav"
-              onclick="openMenu()">
-        <span></span><span></span><span></span>
+
+      <!-- Hamburger (tablet + mobile only) -->
+      <button
+        class="nav__hamburger"
+        id="hamburgerBtn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobileNav"
+        onclick="openMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
+
     </nav>
 
+    <!-- Hero image — offset from left to match Figma composition -->
     <section class="hero">
       <div class="hero__inner">
-        <img src="images/hero.jpg"
-             onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/ed81af6a-82f8-4246-88c5-bf26c740ed4c'"
-             alt="Model wearing xvarog jewellery, viewed from behind" />
+        <img
+          src="https://raw.githubusercontent.com/kasmeks/xvarog/main/images/hero.jpg"
+          alt="Model wearing xvarog jewelry, viewed from behind"
+        />
       </div>
     </section>
 
+    <!-- Separator line -->
     <div class="separator" role="separator"></div>
 
+    <!-- Footer links -->
     <footer class="footer">
-      <a href="care.html"     class="footer__item">CARE</a>
+      <a href="care.html" class="footer__item">CARE</a>
       <a href="shipping.html" class="footer__item">SHIPPING AND RETURNS</a>
-      <a href="terms.html"    class="footer__item">TERMS AND CONDITIONS</a>
+      <a href="terms.html" class="footer__item">TERMS AND CONDITIONS</a>
       <span class="footer__item">© XVAROG 2026</span>
     </footer>
 
   </div>
 
-  <script src="js/main.js"></script>
+  <script>
+    function openMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+
 </body>
 </html>
