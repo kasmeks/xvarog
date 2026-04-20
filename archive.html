@@ -316,6 +316,21 @@
       line-height: 1;
     }
 
+    .mobile-nav__logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      transform: none;
+      width: 35px;
+      height: 35px;
+    }
+
+    .mobile-nav__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
     @media (max-width: 1024px) {
       :root {
@@ -380,7 +395,10 @@
 
       .footer {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
         gap: 14px;
         padding-bottom: 20px;
       }
@@ -395,6 +413,9 @@
 
   <!-- Mobile nav overlay -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="/" class="mobile-nav__logo" onclick="closeMenu()">
+      <img src="https://kasmeks.github.io/xvarog/images/logo.png" alt="xvarog logo" />
+    </a>
     <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
     <a href="/about" onclick="closeMenu()">about</a>
     <a href="/shop" onclick="closeMenu()">shop</a>
@@ -492,7 +513,8 @@
     <footer class="footer">
       <a href="/care" class="footer__item">CARE</a>
       <a href="/shipping" class="footer__item">SHIPPING AND RETURNS</a>
-      <a href="/terms" class="footer__item">TERMS AND CONDITIONS</a>
+      <a href="/datenschutz" class="footer__item">DATENSCHUTZ</a>
+      <a href="/impressum" class="footer__item">IMPRESSUM</a>
       <span class="footer__item">© XVAROG 2026</span>
     </footer>
 

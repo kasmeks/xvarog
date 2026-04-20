@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>about — xvarog</title>
+  <title>datenschutz — xvarog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -32,24 +32,11 @@
       --max-width:       1440px;
       --h-pad:           80px;
       --nav-height:      65px;
-
-      /* Figma proportions:
-         content block starts at left 100px on 1920px canvas → ~5.2%
-         text column width 731px, gap 105px, image 884px
-         total content width = 731+105+884 = 1720px out of 1920px
-         text col ratio: 731/1720 ≈ 42.5%
-         image col ratio: 884/1720 ≈ 51.4%
-         gap ratio: 105/1720 ≈ 6.1% */
-      --col-gap:         6%;
     }
 
     /* ─── Reset ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      height: 100%;
-    }
-
+    html { height: 100%; }
     body {
       width: 100%;
       min-height: 100%;
@@ -61,7 +48,6 @@
       color: var(--color-text);
       -webkit-font-smoothing: antialiased;
     }
-
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
@@ -136,13 +122,6 @@
     .nav__left a:hover,
     .nav__right a:hover { opacity: 0.5; }
 
-    /* active state */
-    .nav__left a.nav--active,
-    .nav__right a.nav--active {
-      font-weight: var(--fw-semibold);
-      color: var(--color-text-dark);
-    }
-
     /* Hamburger */
     .nav__hamburger {
       display: none;
@@ -161,86 +140,6 @@
       background: var(--color-text);
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-
-    /* ─── Content block ──────────────────────────────────────── */
-    .about {
-      display: flex;
-      align-items: stretch; /* both columns same height */
-      gap: var(--col-gap);
-      padding: 40px var(--h-pad) 0;
-      flex: 1; /* grows so footer is pushed down */
-    }
-
-    /* ── Left: text column ── */
-    .about__text {
-      flex: 0 0 42.5%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; /* top text top, bottom text at image bottom */
-      color: var(--color-text-dark);
-      font-size: var(--fs-body);
-      line-height: var(--lh-body);
-    }
-
-    /* Top text group */
-    .about__text-top {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .about__text-top p + p {
-      margin-top: 22px;
-    }
-
-    /* Bold brand name */
-    .about__brand {
-      font-weight: var(--fw-semibold);
-    }
-
-    /* Spacer — no longer needed, justify-content handles it */
-    .about__spacer { display: none; }
-
-    /* Bottom text group */
-    .about__text-bottom {
-      font-size: var(--fs-body);
-      line-height: var(--lh-body);
-      color: var(--color-text-dark);
-    }
-
-    /* ── Right: image column ── */
-    .about__image {
-      flex: 0 0 51.4%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .about__image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* fills column height so bottoms align */
-      display: block;
-    }
-
-    /* ─── Separator ──────────────────────────────────────────── */
-    .separator {
-      height: 1px;
-      background: var(--color-separator);
-      margin: 80px 0 0;
-    }
-
-    /* ─── Footer ─────────────────────────────────────────────── */
-    .footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px var(--h-pad) 40px;
-      font-size: var(--fs-footer);
-      color: var(--color-text);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer__item { white-space: nowrap; }
 
     /* ─── Mobile menu overlay ────────────────────────────────── */
     .mobile-nav {
@@ -295,13 +194,99 @@
       object-fit: contain;
     }
 
+    /* ─── Content ────────────────────────────────────────────── */
+    .legal {
+      padding: 60px var(--h-pad) 0;
+      flex: 1;
+      max-width: 720px;
+    }
+
+    .legal__lang-toggle {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+      font-size: var(--fs-nav);
+    }
+
+    .legal__lang-toggle button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: var(--fs-nav);
+      color: var(--color-text);
+      padding: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .legal__lang-toggle button.active {
+      font-weight: var(--fw-semibold);
+      color: var(--color-text-dark);
+    }
+
+    .legal__lang-toggle button:not(.active):hover {
+      opacity: 0.5;
+    }
+
+    .legal__content { display: none; }
+    .legal__content.active { display: block; }
+
+    .legal h1 {
+      font-size: var(--fs-body);
+      font-weight: var(--fw-semibold);
+      color: var(--color-text-dark);
+      margin-bottom: 32px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .legal h2 {
+      font-size: var(--fs-body);
+      font-weight: var(--fw-semibold);
+      color: var(--color-text-dark);
+      margin-top: 36px;
+      margin-bottom: 12px;
+    }
+
+    .legal p {
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+
+    .legal a {
+      text-decoration: underline;
+      color: var(--color-text);
+    }
+
+    /* ─── Separator ──────────────────────────────────────────── */
+    .separator {
+      height: 1px;
+      background: var(--color-separator);
+      margin: 80px 0 0;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad) 40px;
+      font-size: var(--fs-footer);
+      color: var(--color-text);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__item { white-space: nowrap; }
+
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
     @media (max-width: 1024px) {
       :root {
         --h-pad:      40px;
         --fs-nav:     16px;
         --fs-body:    16px;
-        --col-gap:    40px;
         --nav-height: 69px;
       }
 
@@ -318,31 +303,7 @@
 
       .nav { justify-content: space-between; padding: 20px var(--h-pad); }
 
-      /* Stack columns — image on top, text below */
-      .about {
-        flex-direction: column-reverse;
-        gap: 40px;
-        align-items: flex-start;
-        flex: none; /* on tablet/mobile no need to grow */
-      }
-
-      .about__text {
-        flex: none;
-        width: 100%;
-        /* Restore space between text groups on stacked layout */
-        justify-content: flex-start;
-        gap: 32px;
-      }
-
-      .about__image {
-        flex: none;
-        width: 100%;
-      }
-
-      .about__image img {
-        height: auto; /* natural ratio when stacked */
-        object-fit: cover;
-      }
+      .legal { max-width: 100%; }
     }
 
     /* ─── Mobile (≤ 768px) ───────────────────────────────────── */
@@ -354,14 +315,12 @@
         --nav-height: 65px;
       }
 
-      .about { gap: 28px; padding-top: 40px; }
+      .legal { padding-top: 40px; }
 
-     .footer {
+      .footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
         gap: 14px;
         padding-bottom: 20px;
       }
@@ -390,24 +349,17 @@
 
     <!-- Nav -->
     <nav class="nav" aria-label="Main navigation">
-
       <div class="nav__left">
-        <a href="/about" class="nav--active">about</a>
+        <a href="/about">about</a>
         <a href="/shop">shop</a>
       </div>
-
-         <div class="nav__logo">
-        <a href="/"><img
-          src="https://kasmeks.github.io/xvarog/images/logo.png"
-          alt="xvarog logo"
-        /></a>
+      <div class="nav__logo">
+        <a href="/"><img src="https://kasmeks.github.io/xvarog/images/logo.png" alt="xvarog logo" /></a>
       </div>
-
       <div class="nav__right">
         <a href="/custom">custom</a>
         <a href="/archive">archive</a>
       </div>
-
       <button
         class="nav__hamburger"
         id="hamburgerBtn"
@@ -416,50 +368,72 @@
         aria-controls="mobileNav"
         onclick="openMenu()"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
-
     </nav>
 
-    <!-- About content -->
-    <main class="about">
+    <!-- Content -->
+    <main class="legal">
 
-      <!-- Left: text column -->
-      <div class="about__text">
-
-        <div class="about__text-top">
-          <p>
-            <span class="about__brand">xvarog</span>
-            (from Slavic: Svarog, god of metalsmithing) is a Ukrainian jeweller completing her apprenticeship at the world's first jewellery school, founded in Pforzheim in 1768.
-          </p>
-          <p>The focus of her work is combining different materials, such as metals, wood, minerals, leather, and ethically sourced animal elements, into wearable pieces.</p>
-          <p>The philosophy of xvarog is a conscious return to pre-industrial craft, to the way jewellery was made when time and skill were woven into each piece. Every decision is intentional, every change takes time. It is the belief that the value of a piece lives in the hours and hands it took to make it.</p>
-        </div>
-
-        <div class="about__spacer"></div>
-
-        <div class="about__text-bottom">
-          <p>All animal materials are ethically sourced and treated with care to give them a second life. Only one of a kind pieces, entirely handmade by one person.</p>
-        </div>
-
+      <div class="legal__lang-toggle">
+        <button class="active" onclick="setLang('de')" id="btn-de">DE</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
       </div>
 
-      <!-- Right: image -->
-      <div class="about__image">
-        <img
-          src="https://kasmeks.github.io/xvarog/images/about-photo.jpg"
-          alt="xvarog jewellery piece — fur and metal bracelet"
-        />
+      <!-- ── German ── -->
+      <div class="legal__content active" id="lang-de">
+        <h1>Datenschutzerklärung</h1>
+
+        <h2>1. Verantwortliche Person</h2>
+        <p>Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:</p>
+        <p>Kseniia Panina<br />Keplerstraße 75<br />75175 Pforzheim<br />Deutschland<br />E-Mail: <a href="mailto:contact@xvarog.com">contact@xvarog.com</a></p>
+
+        <h2>2. Erhebung und Verarbeitung von Daten</h2>
+        <p>Diese Website erhebt und verarbeitet keine personenbezogenen Daten über Cookies oder Tracking-Tools. Es werden keine Analyse- oder Werbe-Dienste Dritter eingesetzt.</p>
+        <p>Beim Besuch der Website werden durch den Hosting-Anbieter serverseitig technische Daten (z. B. IP-Adresse, Uhrzeit des Zugriffs, aufgerufene Seite) in Server-Logs gespeichert. Diese Daten sind für den technischen Betrieb notwendig und werden nicht mit anderen Datenquellen zusammengeführt.</p>
+
+        <h2>3. Google Fonts</h2>
+        <p>Diese Website verwendet Google Fonts zur Darstellung von Schriftarten. Beim Laden der Seite stellt Ihr Browser eine Verbindung zu den Servern von Google (Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) her, wobei Ihre IP-Adresse übermittelt werden kann.</p>
+        <p>Die Nutzung von Google Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen Darstellung der Website). Weitere Informationen finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.</p>
+
+        <h2>4. Ihre Rechte</h2>
+        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Zur Geltendmachung Ihrer Rechte wenden Sie sich bitte an die oben genannte E-Mail-Adresse.</p>
+        <p>Sie haben zudem das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. Die zuständige Behörde in Baden-Württemberg ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg.</p>
+
+        <h2>5. Änderungen</h2>
+        <p>Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Die jeweils aktuelle Version ist auf dieser Seite abrufbar.</p>
+        <p>Stand: April 2026</p>
+      </div>
+
+      <!-- ── English ── -->
+      <div class="legal__content" id="lang-en">
+        <h1>Privacy Policy</h1>
+
+        <h2>1. Controller</h2>
+        <p>The person responsible for data processing on this website is:</p>
+        <p>Kseniia Panina<br />Keplerstraße 75<br />75175 Pforzheim<br />Germany<br />Email: <a href="mailto:contact@xvarog.com">contact@xvarog.com</a></p>
+
+        <h2>2. Data Collection and Processing</h2>
+        <p>This website does not collect or process personal data through cookies or tracking tools. No third-party analytics or advertising services are used.</p>
+        <p>When you visit the website, your hosting provider may store technical data in server logs (e.g. IP address, time of access, page requested). This data is necessary for technical operation and is not merged with other data sources.</p>
+
+        <h2>3. Google Fonts</h2>
+        <p>This website uses Google Fonts to display typefaces. When the page loads, your browser connects to Google's servers (Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA), which may transmit your IP address.</p>
+        <p>Google Fonts is used on the basis of Art. 6(1)(f) GDPR (legitimate interest in consistent visual presentation). For more information, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+
+        <h2>4. Your Rights</h2>
+        <p>You have the right to access, rectify, erase, and restrict the processing of your personal data, as well as the right to data portability. To exercise your rights, please contact us at the email address above.</p>
+        <p>You also have the right to lodge a complaint with a data protection supervisory authority. The competent authority in Baden-Württemberg is the State Commissioner for Data Protection and Freedom of Information (LfDI Baden-Württemberg).</p>
+
+        <h2>5. Changes</h2>
+        <p>We reserve the right to update this privacy policy as needed. The current version is always available on this page.</p>
+        <p>Last updated: April 2026</p>
       </div>
 
     </main>
 
-    <!-- Separator -->
     <div class="separator" role="separator"></div>
 
-    <!-- Footer -->
     <footer class="footer">
       <a href="/care" class="footer__item">CARE</a>
       <a href="/shipping" class="footer__item">SHIPPING AND RETURNS</a>
@@ -471,6 +445,13 @@
   </div>
 
   <script>
+    function setLang(lang) {
+      document.querySelectorAll('.legal__content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.legal__lang-toggle button').forEach(el => el.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('active');
+      document.getElementById('btn-' + lang).classList.add('active');
+    }
+
     function openMenu() {
       const nav = document.getElementById('mobileNav');
       const btn = document.getElementById('hamburgerBtn');
