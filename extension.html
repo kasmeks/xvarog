@@ -251,6 +251,8 @@
       display: flex;
       flex-direction: column;
       gap: var(--thumb-gap);
+      min-width: 0;
+
     }
 
     .product__main-image {
@@ -270,7 +272,31 @@
     .product__thumbnails {
       display: flex;
       gap: var(--thumb-gap);
-      flex-wrap: wrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .product__thumbnails::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product__thumbnails-track {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .product__thumbnails-track::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 100%;
+      background: linear-gradient(to right, transparent 0%, transparent 50%, #f9f9f9 100%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .product__thumb {
@@ -372,7 +398,7 @@
         --nav-height: 65px;
       }
 
-      .content { padding-top: 40px; }
+      .content { padding-top: 10px; }
 
       .product {
         grid-template-columns: 1fr;
@@ -386,6 +412,10 @@
       .product__main-image img {
         height: 80vh;
         object-fit: contain;
+      }
+
+      .product__viewer {
+        gap: 8px;
       }
 
       .footer {
@@ -458,25 +488,27 @@
               alt="EXTENSION neckpiece — white horse leather collar with braided extension and silver clasp"
             />
           </div>
-            <div class="product__thumbnails">
-              <button class="product__thumb is-active" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_clasp_flatlay.jpg')" aria-label="Image 1">
-                <img src="https://kasmeks.github.io/xvarog/images/extension_clasp_flatlay.jpg" alt="Fur band with silver clasp, flat lay on black" />
-              </button>
-              <button class="product__thumb is-active" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_band_flatlay.jpg')" aria-label="Image 1">
-                <img src="https://kasmeks.github.io/xvarog/images/extension_band_flatlay.jpg" alt="Fur band with silver clasp, flat lay on black" />
-              </button>
-              <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_clasp_detail.jpg')" aria-label="Image 3">
-                <img src="https://kasmeks.github.io/xvarog/images/extension_clasp_detail.jpg" alt="Extreme close-up of the ornate silver clasp on white fur" />
-              </button>
-              <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_worn_back_01.jpg')" aria-label="Image 4">
-                <img src="https://kasmeks.github.io/xvarog/images/extension_worn_back_01.jpg" alt="Worn from behind, loose braid down spine, black fitted top" />
-              </button>
-              <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_worn_back_02.jpg')" aria-label="Image 5">
-                <img src="https://kasmeks.github.io/xvarog/images/extension_worn_back_02.jpg" alt="Worn from behind, braid down spine, black tank top" />
-              </button>
-              <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_worn_front.jpg')" aria-label="Image 6">
-                <img src="https://kasmeks.github.io/xvarog/images/extension_worn_front.jpg" alt="Worn front-facing, clasp detail on throat" />
-              </button>
+            <div class="product__thumbnails-track">
+              <div class="product__thumbnails">
+                <button class="product__thumb is-active" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_clasp_flatlay.jpg')" aria-label="Image 1">
+                  <img src="https://kasmeks.github.io/xvarog/images/extension_clasp_flatlay.jpg" alt="Fur band with silver clasp, flat lay on black" />
+                </button>
+                <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_band_flatlay.jpg')" aria-label="Image 1">
+                  <img src="https://kasmeks.github.io/xvarog/images/extension_band_flatlay.jpg" alt="Fur band with silver clasp, flat lay on black" />
+                </button>
+                <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_clasp_detail.jpg')" aria-label="Image 3">
+                  <img src="https://kasmeks.github.io/xvarog/images/extension_clasp_detail.jpg" alt="Extreme close-up of the ornate silver clasp on white fur" />
+                </button>
+                <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_worn_back_01.jpg')" aria-label="Image 4">
+                  <img src="https://kasmeks.github.io/xvarog/images/extension_worn_back_01.jpg" alt="Worn from behind, loose braid down spine, black fitted top" />
+                </button>
+                <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_worn_back_02.jpg')" aria-label="Image 5">
+                  <img src="https://kasmeks.github.io/xvarog/images/extension_worn_back_02.jpg" alt="Worn from behind, braid down spine, black tank top" />
+                </button>
+                <button class="product__thumb" onclick="setImage(this, 'https://kasmeks.github.io/xvarog/images/extension_worn_front.jpg')" aria-label="Image 6">
+                  <img src="https://kasmeks.github.io/xvarog/images/extension_worn_front.jpg" alt="Worn front-facing, clasp detail on throat" />
+                </button>
+              </div>
             </div>
         </div>
         <!-- Right: product info -->
@@ -508,40 +540,44 @@
 
   </div>
 
-  <script>
-    function openMenu() {
-      const nav = document.getElementById('mobileNav');
-      const btn = document.getElementById('hamburgerBtn');
-      nav.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
+<script>
+  function openMenu() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburgerBtn');
+    nav.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
 
-    function closeMenu() {
-      const nav = document.getElementById('mobileNav');
-      const btn = document.getElementById('hamburgerBtn');
-      nav.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
+  function closeMenu() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburgerBtn');
+    nav.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
 
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeMenu();
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  function setImage(btn, src) {
+    var main = document.getElementById('mainImage');
+    main.style.opacity = '0';
+    setTimeout(function() {
+      main.src = src;
+      main.style.opacity = '1';
+    }, 150);
+    document.querySelectorAll('.product__thumb').forEach(function(t) {
+      t.style.opacity = '1';
     });
+    btn.style.opacity = '0.45';
+  }
 
-    function setImage(btn, src) {
-      var main = document.getElementById('mainImage');
-      main.style.opacity = '0';
-      setTimeout(function() {
-        main.src = src;
-        main.style.opacity = '1';
-      }, 150);
-      document.querySelectorAll('.product__thumb').forEach(function(t) {
-        t.classList.remove('is-active');
-      });
-      btn.classList.add('is-active');
-    }
-  </script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.product__thumb').style.opacity = '0.45';
+  });
+</script>
 
 </body>
 </html>
