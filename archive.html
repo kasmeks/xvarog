@@ -331,6 +331,26 @@
       object-fit: contain;
     }
 
+    .mobile-nav__social {
+      display: flex;
+      gap: 20px;
+      position: absolute;
+      bottom: 220px;
+    }
+
+    .mobile-nav__social a {
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+
+    .mobile-nav__social a:hover { opacity: 0.35; }
+
+    .mobile-nav__social img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
     @media (max-width: 1024px) {
       :root {
@@ -421,6 +441,14 @@
     <a href="/shop" onclick="closeMenu()">shop</a>
     <a href="/custom" onclick="closeMenu()">custom</a>
     <a href="/archive" onclick="closeMenu()">archive</a>
+    <div class="mobile-nav__social">
+      <a href="mailto:contact@xvarog.com" aria-label="Email xvarog">
+        <img src="https://kasmeks.github.io/xvarog/images/email.png" alt="Email" />
+      </a>
+      <a href="https://www.instagram.com/xvarog" target="_blank" rel="noopener" aria-label="xvarog on Instagram">
+        <img src="https://kasmeks.github.io/xvarog/images/instagram.png" alt="Instagram" />
+      </a>
+    </div>
   </div>
 
   <div class="page">

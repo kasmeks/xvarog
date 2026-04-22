@@ -207,6 +207,44 @@
       color: var(--color-text-dark);
     }
 
+    /* ── Contact/social block ── */
+    .about__contact {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .about__contact-intro {
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      color: var(--color-text-dark);
+    }
+
+    .about__contact-links {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about__contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 6px;
+      color: var(--color-text-dark);
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      transition: opacity 0.2s ease;
+    }
+
+    .about__contact-link:hover { opacity: 0.5; }
+
+    .about__contact-link img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
     /* ── Right: image column ── */
     .about__image {
       flex: 0 0 51.4%;
@@ -292,6 +330,26 @@
     .mobile-nav__logo img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
+    }
+
+    .mobile-nav__social {
+      display: flex;
+      gap: 20px;
+      position: absolute;
+      bottom: 220px;
+    }
+
+    .mobile-nav__social a {
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+
+    .mobile-nav__social a:hover { opacity: 0.35; }
+
+    .mobile-nav__social img {
+      width: 24px;
+      height: 24px;
       object-fit: contain;
     }
 
@@ -384,6 +442,14 @@
     <a href="/shop" onclick="closeMenu()">shop</a>
     <a href="/custom" onclick="closeMenu()">custom</a>
     <a href="/archive" onclick="closeMenu()">archive</a>
+    <div class="mobile-nav__social">
+      <a href="mailto:contact@xvarog.com" aria-label="Email xvarog">
+        <img src="https://kasmeks.github.io/xvarog/images/email.png" alt="Email" />
+      </a>
+      <a href="https://www.instagram.com/xvarog" target="_blank" rel="noopener" aria-label="xvarog on Instagram">
+        <img src="https://kasmeks.github.io/xvarog/images/instagram.png" alt="Instagram" />
+      </a>
+    </div>
   </div>
 
   <div class="page">
@@ -435,13 +501,22 @@
             (inspired from Slavic: Svarog, god of metalsmithing) is a Ukrainian jeweller completing her apprenticeship at the world's first jewellery school, founded in Pforzheim in 1768.
           </p>
           <p>The focus of her work is combining different materials, such as metals, wood, minerals, leather, and ethically sourced animal elements, into wearable pieces.</p>
-          <p>The philosophy of xvarog is a conscious return to pre-industrial craft, to the way jewellery was made when time and skill were woven into each piece. Every decision is intentional, every change takes time. It is the belief that the value of a piece lives in the hours and hands it took to make it.</p>
+          <p>The philosophy of xvarog is a conscious return to pre-industrial craft, to the way jewellery was made when time and skill were woven into each piece. Every decision is intentional, every change takes time. It is the belief that the value of a piece lives in the hours and hands it took to make it.<br><br><br></p>
+          <p>All animal materials are ethically sourced and treated with care to give them a second life. Only one of a kind pieces, entirely handmade by one person.</p>
         </div>
 
-        <div class="about__spacer"></div>
-
-        <div class="about__text-bottom">
-          <p>All animal materials are ethically sourced and treated with care to give them a second life. Only one of a kind pieces, entirely handmade by one person.</p>
+        <div class="about__contact">
+          <p class="about__contact-intro">To arrange a unique bespoke piece, get in touch at contact@xvarog.com.</p>
+          <div class="about__contact-links">
+            <a href="mailto:contact@xvarog.com" class="about__contact-link">
+              <img src="https://kasmeks.github.io/xvarog/images/email.png" alt="Email" />
+              <span>contact@xvarog.com</span>
+            </a>
+            <a href="https://www.instagram.com/xvarog" target="_blank" rel="noopener" class="about__contact-link">
+              <img src="https://kasmeks.github.io/xvarog/images/instagram.png" alt="Instagram" />
+              <span>@xvarog</span>
+            </a>
+          </div>
         </div>
 
       </div>
