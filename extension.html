@@ -255,19 +255,32 @@
 
     }
 
-    .product__main-image {
-      width: 100%;
-      overflow: hidden;
-    }
+      .product__main-image {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
 
-    .product__main-image img {
-      width: 100%;
-      height: calc(100vh - var(--nav-height) - 45px - 33px);
-      display: block;
-      object-fit: cover;
-      object-position: center;
-      transition: opacity 0.15s ease;
-    }
+      .product__main-image img {
+        width: 100%;
+        height: calc(100vh - var(--nav-height) - 45px - 33px);
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      #mainImageBg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        transition: none;
+      }
+
+      #mainImage {
+        position: relative;
+        z-index: 1;
+        transition: opacity 0.25s ease;
+      }
 
     .product__thumbnails {
       display: flex;
@@ -482,7 +495,13 @@
 
         <!-- Left: image viewer -->
         <div class="product__viewer">
-          <div class="product__main-image">
+            <div class="product__main-image">
+            <img
+              id="mainImageBg"
+              src="https://kasmeks.github.io/xvarog/images/extension_clasp_flatlay.jpg"
+              alt=""
+              aria-hidden="true"
+            />
             <img
               id="mainImage"
               src="https://kasmeks.github.io/xvarog/images/extension_clasp_flatlay.jpg"
@@ -563,16 +582,20 @@
   });
 
   function setImage(btn, src) {
-    var main = document.getElementById('mainImage');
-    main.style.opacity = '0';
+  var top = document.getElementById('mainImage');
+  var bg = document.getElementById('mainImageBg');
+  bg.src = src;
+  setTimeout(function() {
+    top.style.opacity = '0';
     setTimeout(function() {
-      main.src = src;
-      main.style.opacity = '1';
-    }, 150);
-    document.querySelectorAll('.product__thumb').forEach(function(t) {
-      t.style.opacity = '1';
-    });
-    btn.style.opacity = '0.45';
+      top.src = src;
+      top.style.opacity = '1';
+    }, 250);
+  }, 20);
+  document.querySelectorAll('.product__thumb').forEach(function(t) {
+    t.style.opacity = '1';
+  });
+  btn.style.opacity = '0.45';
   }
 
   document.addEventListener('DOMContentLoaded', function() {
