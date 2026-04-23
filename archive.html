@@ -157,28 +157,6 @@
     }
 
     /* ─── Archive grid ───────────────────────────────────────── */
-    /*
-      Figma pixel values on 1920px canvas:
-        Left col:  left 100px, width 897px
-        Gap:       46px  (right col starts at 1043px)
-        Right col: width 777px
-
-      Left col contains:
-        - Landscape image 897×672px (ratio 3996:2997 ≈ 4:3) + 12px gap + 16px caption
-        - 23px gap between items
-        - Portrait image 608×456px + 12px gap + 16px caption
-
-      Right col contains:
-        - Tall portrait image 777×(777×4096/2706)px (ratio 2706:4096) + 12px gap + 16px caption
-        The image fills exactly the height of both left images combined.
-
-      Strategy: CSS Grid with column widths matching Figma ratios.
-      Right col image uses object-fit:cover + fixed height derived from
-      left col total height, computed via aspect-ratio on a wrapper.
-      Since we can't sync heights cross-column in pure CSS without JS,
-      we use the right image's natural aspect ratio inside a wrapper
-      that stretches to fill via align-items:stretch on the grid.
-    */
 
     /* Outer grid: two columns + gap */
     .archive {
@@ -208,10 +186,7 @@
       display: block;
     }
 
-    /* Gap between the two left items — from Figma:
-       landscape bottom: top 161 + height 672 + 12 caption-gap + 16 caption = 861px
-       wild boar top: 880px → inter-item gap = 880 - 861 = 19px (before the item div)
-       We add this as margin-top on the second item */
+    /* Gap between the two left items */
     .archive__left-bottom {
       margin-top: 19px;
       padding-right: 200px;
@@ -230,9 +205,6 @@
     .archive__caption .year { color: var(--color-text-year); }
 
     /* ── Right column ── */
-    /* The right column is a grid cell that stretches to the row height.
-       We make the image wrapper fill all available height so the tall
-       portrait matches the combined height of the left column. */
     .archive__right {
       display: flex;
       flex-direction: column;
@@ -495,23 +467,23 @@
 
         <!-- Top item: landscape image, caption right-aligned -->
         <div class="archive__item">
-          <img
+          <a href="https://xvarog.com/keychain"><img
             src="https://kasmeks.github.io/xvarog/images/archive-keychain.JPG"
             alt="KEYCHAIN — xvarog 2025"
-          />
+          /></a>
           <p class="archive__caption archive__caption--right">
-            KEYCHAIN, <span class="year">2025</span>
+            <a href="https://xvarog.com/keychain"><u>KEYCHAIN, <span class="year">2025</span></u></a>
           </p>
         </div>
 
         <!-- Bottom item: smaller portrait image, caption left-aligned -->
         <div class="archive__item archive__left-bottom">
-          <img
+          <a href="https://xvarog.com/keychain"><img
             src="https://kasmeks.github.io/xvarog/images/archive-wildboar.jpg"
             alt="WILD BOAR (KEYCHAIN) — xvarog 2025"
-          />
+          /></a>
           <p class="archive__caption archive__caption--left">
-            WILD BOAR (KEYCHAIN), <span class="year">2025</span>
+            <a href="https://xvarog.com/keychain"><u>WILD BOAR (KEYCHAIN), <span class="year">2025</span></u></a>
           </p>
         </div>
 
