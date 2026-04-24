@@ -386,7 +386,7 @@
     }
 
     .product__meta {
-      margin-top: 0;
+      margin-top: 20px;
     }
 
     .product__meta-line {
@@ -436,10 +436,10 @@
         grid-template-columns: 1fr;
         gap: 16px;
       }
-      
-      .product__thumbnails {
-      gap: 6px;
-      }
+
+      .product__meta {
+      margin-top: 7px;
+     }
 
       .product__info {
         position: static;
@@ -497,14 +497,14 @@
     <nav class="nav" aria-label="Main navigation">
       <div class="nav__left">
         <a href="/about">about</a>
-        <a href="/shop">shop</a>
+        <a href="/shop" class="nav--active">shop</a>
       </div>
       <div class="nav__logo">
         <a href="/"><img src="https://kasmeks.github.io/xvarog/images/logo.png" alt="xvarog logo" /></a>
       </div>
       <div class="nav__right">
         <a href="/custom">custom</a>
-        <a href="/archive" class="nav--active">archive</a>
+        <a href="/archive">archive</a>
       </div>
       <button
         class="nav__hamburger"
