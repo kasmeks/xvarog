@@ -192,7 +192,6 @@
     .care {
       padding: 60px var(--h-pad) 0;
       flex: 1;
-      max-width: 720px;
     }
 
     .care__title {
@@ -202,6 +201,19 @@
       text-transform: uppercase;
       color: var(--color-text-dark);
       margin-bottom: 48px;
+    }
+
+    .care__columns {
+      display: grid;
+      grid-template-columns: 550px 550px;
+      gap: 0 100px;
+      max-width: 900px;
+      justify-content: space-between;
+    }
+
+    .care__col {
+      display: flex;
+      flex-direction: column;
     }
 
     .care__section {
@@ -223,6 +235,13 @@
 
     .care__section p + p {
       margin-top: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .care__columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
     }
 
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
@@ -306,40 +325,45 @@
     <main class="care">
       <h1 class="care__title">Care</h1>
 
-      <div class="care__section">
-        <h2 class="care__section-title">General</h2>
-        <p>Each piece is made by hand from materials that respond to time, wear, and environment. With the right care, they age beautifully.</p>
-      </div>
+      <div class="care__columns">
+        <div class="care__col">
+          <div class="care__section">
+            <h2 class="care__section-title">General</h2>
+            <p>Each piece is made by hand from materials that respond to time, wear, and environment. With the right care, they age beautifully.</p>
+          </div>
 
-      <div class="care__section">
-        <h2 class="care__section-title">Metal</h2>
-        <p>Clean with a soft, dry cloth after wearing. Avoid prolonged contact with water, perfumes, and lotions — remove your piece before washing hands or swimming.</p>
-        <p>Silver will naturally oxidise over time. To restore its shine, use a silver polishing cloth. For intentionally darkened finishes, avoid abrasive polishing to preserve the patina.</p>
-      </div>
+          <div class="care__section">
+            <h2 class="care__section-title">Metal</h2>
+            <p>Silver will naturally oxidise over time. To restore its shine, use a silver polishing cloth. For intentionally darkened finishes, avoid abrasive polishing to preserve the patina.</p>
+          </div>
 
-      <div class="care__section">
-        <h2 class="care__section-title">Wood and natural materials</h2>
-        <p>Keep away from moisture and direct sunlight. Do not submerge in water. Occasional conditioning with a small amount of natural oil (such as linseed or beeswax) will help preserve the material.</p>
-      </div>
+          <div class="care__section">
+            <h2 class="care__section-title">Wood and natural materials</h2>
+            <p>Keep away from moisture and direct sunlight. Do not submerge in water. Occasional conditioning with a small amount of natural oil (such as linseed or beeswax) will help preserve the material.</p>
+          </div>
 
-      <div class="care__section">
-        <h2 class="care__section-title">Leather</h2>
-        <p>Avoid water and excessive heat. Store flat or hanging — never folded. Condition periodically with a leather balm to maintain suppleness.</p>
-      </div>
+          <div class="care__section">
+            <h2 class="care__section-title">Leather</h2>
+            <p>Avoid water and excessive heat. Store flat or hanging — never folded.</p>
+          </div>
+        </div>
 
-      <div class="care__section">
-        <h2 class="care__section-title">Stones and minerals</h2>
-        <p>Many natural stones are sensitive to chemicals, heat, and impact. Remove your piece before activities that may expose it to sharp surfaces or harsh substances.</p>
-      </div>
+        <div class="care__col">
+          <div class="care__section">
+            <h2 class="care__section-title">Stones and minerals</h2>
+            <p>Many natural stones are sensitive to chemicals, heat, and impact. Remove your piece before activities that may expose it to sharp surfaces or harsh substances.</p>
+          </div>
 
-      <div class="care__section">
-        <h2 class="care__section-title">Storage</h2>
-        <p>Store each piece separately to prevent scratching. A soft pouch or lined box works best. Keep away from humidity and direct light.</p>
-      </div>
+          <div class="care__section">
+            <h2 class="care__section-title">Storage</h2>
+            <p>Store each piece separately to prevent scratching. A soft pouch or lined box works best. Keep away from humidity and direct light.</p>
+          </div>
 
-      <div class="care__section">
-        <h2 class="care__section-title">Questions</h2>
-        <p>If you have questions about caring for a specific piece, feel free to reach out at <a href="mailto:contact@xvarog.com" style="text-decoration: underline;">contact@xvarog.com</a>.</p>
+          <div class="care__section">
+            <h2 class="care__section-title">Questions</h2>
+            <p>If you have questions about caring for a specific piece, feel free to reach out at <a href="mailto:contact@xvarog.com" style="text-decoration: underline;">contact@xvarog.com</a>.</p>
+          </div>
+        </div>
       </div>
     </main>
 
