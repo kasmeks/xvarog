@@ -31,21 +31,12 @@
       --h-pad:           80px;
       --nav-height:      85px;
 
-      /* Figma grid proportions (out of 1720px content width):
-         Left col:  100px → 897px wide  → 897/1720 ≈ 52.15%
-         Gap:       897+100 = 997 → right col starts at 1043px → gap = 1043-997 = 46px → 46/1720 ≈ 2.67%
-         Right col: 777px wide → 777/1720 ≈ 45.17%
-      */
-      --col-gap:        2.67%;
+      --col-gap:         46px;
     }
 
     /* ─── Reset ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      height: 100%;
-    }
-
+    html { height: 100%; }
     body {
       width: 100%;
       min-height: 100%;
@@ -57,7 +48,6 @@
       color: var(--color-text);
       -webkit-font-smoothing: antialiased;
     }
-
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
@@ -156,28 +146,39 @@
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
-    /* ─── Archive grid ───────────────────────────────────────── */
-
-    /* Outer grid: two columns + gap */
+    /* ─── Archive layout ─────────────────────────────────────── */
     .archive {
-      display: grid;
-      grid-template-columns: 897fr 777fr;
-      gap: 0 46px;
       padding: 40px var(--h-pad) 0;
-      align-items: start;
-      flex: 1; /* pushes footer down */
-    }
-
-    /* ── Left column ── */
-    .archive__left {
+      flex: 1;
       display: flex;
       flex-direction: column;
+      gap: 19px;
+    }
+
+    /* Caption shared */
+    .archive__caption {
+      font-size: var(--fs-caption);
+      line-height: 16px;
+      color: var(--color-text-dark);
+    }
+
+    .archive__caption .year { color: var(--color-text-year); }
+    .archive__caption--right { text-align: right; }
+    .archive__caption--left  { text-align: left; }
+
+    /* ── Row 1: columns proportional to natural image ratios → equal height, no crop ── */
+    /* earrings 992/1040=0.954  |  fur-ring 868/1040=0.835  |  tooth 1386/1040=1.333  */
+    .archive__row-top {
+      display: grid;
+      grid-template-columns: 954fr 835fr 1333fr;
+      gap: 46px;
+      align-items: end;
     }
 
     .archive__item {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .archive__item img {
@@ -186,34 +187,32 @@
       display: block;
     }
 
-    /* Gap between the two left items */
+    /* ── Row 2: two columns (897fr : 777fr) ── */
+    .archive__row-bottom {
+      display: grid;
+      grid-template-columns: 897fr 777fr;
+      gap: 0 var(--col-gap);
+      align-items: start;
+    }
+
+    .archive__left {
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+    }
+
     .archive__left-bottom {
-      margin-top: 19px;
       padding-right: 200px;
     }
 
-    /* Caption */
-    .archive__caption {
-      font-size: var(--fs-caption);
-      line-height: 16px;
-      color: var(--color-text-dark);
-    }
-
-    .archive__caption--right { text-align: right; }
-    .archive__caption--left  { text-align: left; }
-
-    .archive__caption .year { color: var(--color-text-year); }
-
-    /* ── Right column ── */
+    /* Right column: single tall image stretching to match left height */
     .archive__right {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      /* Stretch to match left column height */
       align-self: stretch;
     }
 
-    /* Image wrapper fills all remaining height after caption */
     .archive__right__img-wrap {
       flex: 1;
       min-height: 0;
@@ -291,7 +290,6 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      transform: none;
       width: 35px;
       height: 35px;
     }
@@ -328,6 +326,7 @@
         --h-pad:      40px;
         --fs-nav:     16px;
         --nav-height: 69px;
+        --col-gap:    28px;
       }
 
       .nav__left,
@@ -343,8 +342,7 @@
 
       .nav { justify-content: space-between; padding: 20px var(--h-pad); }
 
-      /* Tighten column gap on tablet */
-      .archive { gap: 0 28px; flex: 1; }
+      .archive__left-bottom { padding-right: 80px; }
     }
 
     /* ─── Mobile (≤ 768px) ───────────────────────────────────── */
@@ -357,14 +355,32 @@
       }
 
       .archive {
-        grid-template-columns: 1fr;
-        gap: 40px 0;
+        gap: 40px;
         padding-top: 40px;
-        flex: none;
       }
 
-      .archive__right { align-self: auto; order: -1; }
-      .archive__left { order: 0; }
+      /* Top row: single column on mobile */
+      .archive__row-top {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* Bottom section: single column */
+      .archive__row-bottom {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* Extension comes before keychain/wildboar on mobile */
+      .archive__right {
+        order: -1;
+        align-self: auto;
+      }
+
+      .archive__left {
+        order: 0;
+        gap: 40px;
+      }
 
       .archive__right__img-wrap {
         flex: none;
@@ -373,23 +389,16 @@
 
       .archive__right__img-wrap img {
         height: auto;
-        object-fit: cover;
       }
 
-      .archive__left-bottom { margin-top: 0; padding-right: 0; }
+      .archive__left-bottom { padding-right: 0; }
 
-      /* Align captions to left on mobile for consistency */
       .archive__caption--right { text-align: left; }
-
-      /* Make internal gap in left column match grid gap for uniform spacing */
-      .archive__left { gap: 40px; }
 
       .footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
         gap: 14px;
         padding-bottom: 20px;
       }
@@ -426,24 +435,20 @@
 
     <!-- Nav -->
     <nav class="nav" aria-label="Main navigation">
-
       <div class="nav__left">
         <a href="/about">about</a>
         <a href="/shop">shop</a>
       </div>
-
-   <div class="nav__logo">
+      <div class="nav__logo">
         <a href="/"><img
           src="https://kasmeks.github.io/xvarog/images/logo.png"
           alt="xvarog logo"
         /></a>
       </div>
-
       <div class="nav__right">
         <a href="/custom">custom</a>
         <a href="/archive" class="nav--active">archive</a>
       </div>
-
       <button
         class="nav__hamburger"
         id="hamburgerBtn"
@@ -456,59 +461,112 @@
         <span></span>
         <span></span>
       </button>
-
     </nav>
 
-    <!-- Archive grid -->
+    <!-- Archive content -->
     <main class="archive">
 
-      <!-- Left column -->
-      <div class="archive__left">
+      <!-- Row 1: three new 2026 pieces -->
+      <div class="archive__row-top">
 
-        <!-- Top item: landscape image, caption right-aligned -->
+        <!-- 1. Horsehair earrings — ONCE, 2026 -->
         <div class="archive__item">
-          <a href="https://xvarog.com/keychain"><img
-            src="https://kasmeks.github.io/xvarog/images/archive-keychain.JPG"
-            alt="KEYCHAIN — xvarog 2025"
-          /></a>
+          <a href="https://xvarog.com/once">
+            <img
+              src="https://kasmeks.github.io/xvarog/images/horsehair-earrings-black-display.jpg"
+              alt="ONCE — xvarog 2026"
+            />
+          </a>
           <p class="archive__caption archive__caption--right">
-            <a href="https://xvarog.com/keychain"><u>KEYCHAIN, <span class="year">2025</span></u></a>
+            <a href="https://xvarog.com/once"><u>ONCE, <span class="year">2026</span></u></a>
           </p>
         </div>
 
-        <!-- Bottom item: smaller portrait image, caption left-aligned -->
-        <div class="archive__item archive__left-bottom">
-          <a href="https://xvarog.com/keychain"><img
-            src="https://kasmeks.github.io/xvarog/images/archive-wildboar.jpg"
-            alt="WILD BOAR (KEYCHAIN) — xvarog 2025"
-          /></a>
-          <p class="archive__caption archive__caption--left">
-            <a href="https://xvarog.com/keychain"><u>WILD BOAR (KEYCHAIN), <span class="year">2025</span></u></a>
+        <!-- 2. Fur ring — SHELL, 2026 -->
+        <div class="archive__item">
+          <a href="https://xvarog.com/shell">
+            <img
+              src="https://kasmeks.github.io/xvarog/images/fur-ring-top-view-gray-bg.jpg"
+              alt="SHELL — xvarog 2026"
+            />
+          </a>
+          <p class="archive__caption archive__caption--right">
+            <a href="https://xvarog.com/shell"><u>SHELL, <span class="year">2026</span></u></a>
+          </p>
+        </div>
+
+        <!-- 3. Tooth pendant on pillow — DEAR FRIEND, 2026 -->
+        <div class="archive__item">
+          <a href="https://xvarog.com/dear-friend">
+            <img
+              src="https://kasmeks.github.io/xvarog/images/tooth-pendant-pillow-shadow.jpg"
+              alt="DEAR FRIEND — xvarog 2026"
+            />
+          </a>
+          <p class="archive__caption archive__caption--right">
+            <a href="https://xvarog.com/dear-friend"><u>DEAR FRIEND, <span class="year">2026</span></u></a>
           </p>
         </div>
 
       </div>
 
-      <!-- Right column: single tall portrait stretching to match left column height -->
-      <!-- On mobile this column is ordered first via CSS order property -->
-      <div class="archive__right">
-        <div class="archive__right__img-wrap">
-          <a href="https://xvarog.com/extension"><img
-            src="https://kasmeks.github.io/xvarog/images/archive-extension.jpg"
-            alt="EXTENSION — xvarog 2026"
-          /></a>
+      <!-- Row 2: existing pieces -->
+      <div class="archive__row-bottom">
+
+        <!-- Left column: keychain + wild boar (desktop) -->
+        <!-- On mobile: order:0, comes after extension -->
+        <div class="archive__left">
+
+          <!-- 5. Keychain landscape -->
+          <div class="archive__item">
+            <a href="https://xvarog.com/keychain">
+              <img
+                src="https://kasmeks.github.io/xvarog/images/archive-keychain.JPG"
+                alt="KEYCHAIN — xvarog 2025"
+              />
+            </a>
+            <p class="archive__caption archive__caption--right">
+              <a href="https://xvarog.com/keychain"><u>KEYCHAIN, <span class="year">2025</span></u></a>
+            </p>
+          </div>
+
+          <!-- 6. Wild boar small -->
+          <div class="archive__item archive__left-bottom">
+            <a href="https://xvarog.com/wildboar">
+              <img
+                src="https://kasmeks.github.io/xvarog/images/archive-wildboar.jpg"
+                alt="WILD BOAR (KEYCHAIN) — xvarog 2025"
+              />
+            </a>
+            <p class="archive__caption archive__caption--left">
+              <a href="https://xvarog.com/wildboar"><u>WILD BOAR (KEYCHAIN), <span class="year">2025</span></u></a>
+            </p>
+          </div>
+
         </div>
-        <p class="archive__caption archive__caption--left">
-           <a href="https://xvarog.com/extension"><u>EXTENSION, <span class="year">2026</span></u></a>
-        </p>
+
+        <!-- Right column: Extension tall -->
+        <!-- On mobile: order:-1, comes before keychain/wildboar -->
+        <div class="archive__right">
+          <div class="archive__right__img-wrap">
+            <a href="https://xvarog.com/extension">
+              <img
+                src="https://kasmeks.github.io/xvarog/images/archive-extension.jpg"
+                alt="EXTENSION — xvarog 2026"
+              />
+            </a>
+          </div>
+          <p class="archive__caption archive__caption--left">
+            <a href="https://xvarog.com/extension"><u>EXTENSION, <span class="year">2026</span></u></a>
+          </p>
+        </div>
+
       </div>
 
     </main>
 
-    <!-- Separator -->
     <div class="separator" role="separator"></div>
 
-    <!-- Footer -->
     <footer class="footer">
       <a href="/care" class="footer__item">CARE</a>
       <a href="/shipping" class="footer__item">SHIPPING AND RETURNS</a>
