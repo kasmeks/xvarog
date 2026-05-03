@@ -5,65 +5,500 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>custom — xvarog</title>
   <meta name="description" content="xvarog custom orders — commission a one-of-a-kind piece made just for you." />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/shared.css" />
-  <link rel="stylesheet" href="css/placeholder.css" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────── */
+    :root {
+      --color-bg:        #ffffff;
+      --color-text:      rgba(0, 0, 0, 0.75);
+      --color-text-dark: #000000;
+      --color-separator: rgba(0, 0, 0, 0.08);
+      --color-border:    rgba(0, 0, 0, 0.08);
+
+      --font:            'Inter', sans-serif;
+      --fw-normal:       400;
+      --fw-semibold:     600;
+
+      --fs-nav:          14px;
+      --fs-body:         15px;
+      --fs-footer:       12px;
+
+      --lh-body:         22px;
+
+      --logo-size:       35px;
+      --nav-gap:         90px;
+
+      --h-pad:           80px;
+      --nav-height:      85px;
+
+      --col-gap:         6%;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { height: 100%; }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-bg);
+      font-family: var(--font);
+      font-weight: var(--fw-normal);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Page wrapper ───────────────────────────────────────── */
+    .page {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      background: var(--color-bg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--nav-height);
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--max-width);
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad);
+      font-size: var(--fs-nav);
+      color: var(--color-text);
+    }
+
+    .nav__left {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+      flex: 1;
+    }
+
+    .nav__logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: var(--logo-size);
+      height: var(--logo-size);
+      flex-shrink: 0;
+    }
+
+    .nav__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .nav__left a,
+    .nav__right a {
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav__left a:hover,
+    .nav__right a:hover { opacity: 0.5; }
+
+    .nav__left a.nav--active,
+    .nav__right a.nav--active {
+      font-weight: var(--fw-semibold);
+      color: var(--color-text-dark);
+    }
+
+    /* ─── Hamburger ──────────────────────────────────────────── */
+    .nav__hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-text);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ─── Mobile menu overlay ────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav a {
+      font-size: 1.8rem;
+      color: var(--color-text);
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .mobile-nav__logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 35px;
+      height: 35px;
+    }
+
+    .mobile-nav__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* ─── Content block ──────────────────────────────────────── */
+    .custom {
+      display: flex;
+      align-items: stretch;
+      gap: var(--col-gap);
+      padding: 40px var(--h-pad) 0;
+      flex: 1;
+    }
+
+    /* ── Left: text column ── */
+    .custom__text {
+      flex: 0 0 42.5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;   
+      color: var(--color-text-dark);
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+    }
+
+    .custom__text-top {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .custom__text-top p + p {
+      margin-top: 22px;
+    }
+
+    /* ── Contact/social block ── */
+    .custom__contact {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .custom__contact-intro {
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      color: var(--color-text-dark);
+    }
+
+    .custom__contact-links {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .custom__contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 6px;
+      color: var(--color-text-dark);
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      transition: opacity 0.2s ease;
+    }
+
+    .custom__contact-link:hover { opacity: 0.5; }
+
+    .custom__contact-link img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    /* ── Right: image column ── */
+    .custom__image {
+      flex: 0 0 51.4%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .custom__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ─── Separator ──────────────────────────────────────────── */
+    .separator {
+      height: 1px;
+      background: var(--color-separator);
+      margin: 80px 0 0;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--h-pad) 40px;
+      font-size: var(--fs-footer);
+      color: var(--color-text);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__item { white-space: nowrap; }
+
+    /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      :root {
+        --h-pad:      40px;
+        --fs-nav:     16px;
+        --fs-body:    16px;
+        --col-gap:    40px;
+        --nav-height: 69px;
+      }
+
+      .nav__left,
+      .nav__right { display: none; }
+
+      .nav__logo {
+        position: static;
+        transform: none;
+      }
+
+      .nav__hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+
+      .nav { justify-content: space-between; padding: 20px var(--h-pad); }
+
+      /* Stack columns — image on top, text below */
+      .custom {
+        flex-direction: column-reverse;
+        gap: 40px;
+        align-items: flex-start;
+        flex: none;
+      }
+
+      .custom__text {
+        flex: none;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 32px;
+      }
+
+      .custom__image {
+        flex: none;
+        width: 100%;
+      }
+
+      .custom__image img {
+        height: auto;
+        object-fit: cover;
+      }
+    }
+
+    /* ─── Mobile (≤ 768px) ───────────────────────────────────── */
+    @media (max-width: 768px) {
+      :root {
+        --h-pad:      20px;
+        --fs-body:    15px;
+        --fs-footer:  11px;
+        --nav-height: 65px;
+      }
+
+      .custom { gap: 28px; padding-top: 40px; }
+
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 14px;
+        padding-bottom: 20px;
+      }
+
+      .separator { margin: 40px 0 0; }
+
+      .mobile-nav a { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Mobile nav overlay -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="/" class="mobile-nav__logo" onclick="closeMenu()">
+      <img src="https://kasmeks.github.io/xvarog/images/logo.png" alt="xvarog logo" />
+    </a>
     <button class="mobile-nav__close" onclick="closeMenu()" aria-label="Close menu">×</button>
-    <a href="about.html"   onclick="closeMenu()">about</a>
-    <a href="shop.html"    onclick="closeMenu()">shop</a>
-    <a href="custom.html"  onclick="closeMenu()">custom</a>
-    <a href="archive.html" onclick="closeMenu()">archive</a>
+    <a href="/about" onclick="closeMenu()">about</a>
+    <a href="/shop" onclick="closeMenu()">shop</a>
+    <a href="/custom" onclick="closeMenu()">custom</a>
+    <a href="/archive" onclick="closeMenu()">archive</a>
   </div>
 
   <div class="page">
 
+    <!-- Nav -->
     <nav class="nav" aria-label="Main navigation">
       <div class="nav__left">
-        <a href="about.html">about</a>
-        <a href="shop.html">shop</a>
+        <a href="/about">about</a>
+        <a href="/shop">shop</a>
       </div>
       <div class="nav__logo">
-        <a href="index.html">
-          <img src="images/logo.png"
-               onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/0d5a151f-5710-4a70-8cc4-cb53065fc909'"
-               alt="xvarog" />
-        </a>
+        <a href="/"><img src="https://kasmeks.github.io/xvarog/images/logo.png" alt="xvarog logo" /></a>
       </div>
       <div class="nav__right">
-        <a href="custom.html" class="nav--active">custom</a>
-        <a href="archive.html">archive</a>
+        <a href="/custom" class="nav--active">custom</a>
+        <a href="/archive">archive</a>
       </div>
-      <button class="nav__hamburger" id="hamburgerBtn"
-              aria-label="Open navigation menu"
-              aria-expanded="false" aria-controls="mobileNav"
-              onclick="openMenu()">
-        <span></span><span></span><span></span>
+      <button
+        class="nav__hamburger"
+        id="hamburgerBtn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobileNav"
+        onclick="openMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </nav>
 
-    <main class="placeholder">
-      <p class="placeholder__title">Custom orders</p>
-      <p class="placeholder__sub">Coming soon</p>
+    <!-- Custom content -->
+    <main class="custom">
+
+      <!-- Left: text column -->
+      <div class="custom__text">
+
+        <div class="custom__text-top">
+          <p>To discuss a custom piece, please reach out with your idea, or ask about recreating something similar to a piece I've already made.</p>
+          <p>Please keep in mind that works involving animal materials cannot be replicated exactly, because no two materials are alike. We can find a close alternative or adapt the design together.</p>
+          <p>To see what metals, minerals, furs, leather or other animal materials I currently have available for custom orders, get in touch and I'll send you a list with photos.</p>
+          <p>To describe your idea:</p>
+        </div>
+
+        <div class="custom__contact">
+          <div class="custom__contact-links">
+            <a href="mailto:contact@xvarog.com" class="custom__contact-link">
+              <img src="https://kasmeks.github.io/xvarog/images/email.png" alt="Email" />
+              <span>contact@xvarog.com</span>
+            </a>
+            <a href="https://www.instagram.com/xvarog" target="_blank" rel="noopener" class="custom__contact-link">
+              <img src="https://kasmeks.github.io/xvarog/images/instagram.png" alt="Instagram" />
+              <span>@xvarog</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: image -->
+      <div class="custom__image">
+        <img
+          src="https://kasmeks.github.io/xvarog/images/tooth-pendants-pair-black-bg.jpg"
+          alt="xvarog custom jewellery — tooth pendants with silver"
+        />
+      </div>
+
     </main>
 
+    <!-- Separator -->
     <div class="separator" role="separator"></div>
 
+    <!-- Footer -->
     <footer class="footer">
-      <a href="care.html"     class="footer__item">CARE</a>
-      <a href="shipping.html" class="footer__item">SHIPPING AND RETURNS</a>
-      <a href="terms.html"    class="footer__item">TERMS AND CONDITIONS</a>
+      <a href="/care" class="footer__item">CARE</a>
+      <a href="/shipping" class="footer__item">SHIPPING AND RETURNS</a>
+      <a href="/datenschutz" class="footer__item">DATENSCHUTZ</a>
+      <a href="/impressum" class="footer__item">IMPRESSUM</a>
       <span class="footer__item">© XVAROG 2026</span>
     </footer>
 
   </div>
 
-  <script src="js/main.js"></script>
+  <script>
+    function openMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+
 </body>
 </html>
