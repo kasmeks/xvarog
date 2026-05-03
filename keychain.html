@@ -389,9 +389,10 @@
       white-space: nowrap;
     }
 
-    .product__meta {
+
+    .product__meta-group {
       margin-top: 20px;
-    }
+      }
 
     .product__meta-line {
       font-size: var(--fs-body);
@@ -403,6 +404,8 @@
     .product__meta-line--desc {
       margin-top: 25px;
     }
+
+
 
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
     @media (max-width: 1024px) {
@@ -446,14 +449,11 @@
         gap: 16px;
       }
 
-      .product__meta {
-      margin-top: 7px;
-     }
       .product__meta-line--desc {
       margin-top: 12px;
       }
       .product__thumbnails {
-      gap: 6px;
+      gap: 10px;
       }
 
       .product__info {
@@ -467,6 +467,10 @@
       .product__main-image {
         min-height: unset;
         aspect-ratio: 3996 / 2997;
+      }
+
+      .product__meta-group {
+      margin-top: 7px;
       }
 
       .footer {
@@ -575,13 +579,16 @@
           <div class="product__header">
             <h1 class="product__title">KEYCHAIN</h1>
             <span class="product__date">dec 2025</span>
-          </div>
-          <div class="product__meta">
-            <p class="product__meta-line">accessory</p>
+        </div>
+        <div class="product__meta">
+          <p class="product__meta-line">accessory</p>
+          <div class="product__meta-group">
             <p class="product__meta-line">leatherwork</p>
             <p class="product__meta-line">WILD BOAR: silver 925, wild boar tooth</p>
             <p class="product__meta-line">painting: silver 925, kopper, enamel</p>
-            <p class="product__meta-line product__meta-line--desc">The wild boar tooth was found in the woods of Brandenburg, Germany, as a part of an animal's skull.</p>
+          </div>
+          <div class="product__meta-group">
+            <p class="product__meta-line">The wild boar tooth was found in the woods of Brandenburg, Germany, as a part of an animal's skull.</p>
           </div>
         </div>
 
