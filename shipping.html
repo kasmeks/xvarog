@@ -192,7 +192,6 @@
     .shipping {
       padding: 60px var(--h-pad) 0;
       flex: 1;
-      max-width: 720px;
     }
 
     .shipping__title {
@@ -202,6 +201,19 @@
       text-transform: uppercase;
       color: var(--color-text-dark);
       margin-bottom: 48px;
+    }
+
+    .shipping__columns {
+      display: grid;
+      grid-template-columns: 550px 550px;
+      gap: 0 100px;
+      max-width: 900px;
+      justify-content: space-between;
+    }
+
+    .shipping__col {
+      display: flex;
+      flex-direction: column;
     }
 
     .shipping__section {
@@ -223,6 +235,13 @@
 
     .shipping__section p + p {
       margin-top: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .shipping__columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
     }
 
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
@@ -306,36 +325,41 @@
     <main class="shipping">
       <h1 class="shipping__title">Shipping and Returns</h1>
 
-      <div class="shipping__section">
-        <h2 class="shipping__section-title">Processing time</h2>
-        <p>Each piece is made by hand. Orders are processed within 3–5 business days. Custom orders may take longer — the timeline is confirmed individually at the time of order.</p>
-      </div>
+      <div class="shipping__columns">
+        <div class="shipping__col">
 
-      <div class="shipping__section">
-        <h2 class="shipping__section-title">Shipping</h2>
-        <p>All orders ship from Pforzheim, Germany via tracked and insured post. Standard delivery within Germany takes 2–4 business days. International delivery typically takes 5–14 business days depending on the destination and local customs.</p>
-        <p>Shipping costs are calculated at checkout. For international orders, any customs duties or import taxes are the responsibility of the recipient.</p>
-      </div>
+          <div class="shipping__section">
+            <h2 class="shipping__section-title">Processing time</h2>
+            <p>Each piece is made by hand. Orders are processed within 1–5 business days. Custom orders may take longer. The timeline is confirmed individually at the time of order.</p>
+          </div>
 
-      <div class="shipping__section">
-        <h2 class="shipping__section-title">Packaging</h2>
-        <p>Every order arrives in a small box with a soft pouch, ready to store or gift. Packaging is kept minimal and reusable where possible.</p>
-      </div>
+          <div class="shipping__section">
+            <h2 class="shipping__section-title">Shipping</h2>
+            <p>All orders ship from Pforzheim, Germany via tracked and insured post. Standard delivery within Germany takes 2–4 business days. International delivery typically takes 5–14 business days depending on the destination.</p>
+            <p>All shipping costs are borne by the buyer and calculated at checkout. For international orders, additional import duties or taxes may apply upon arrival. These are beyond our control and cannot be included in the price.</p>
+          </div>
 
-      <div class="shipping__section">
-        <h2 class="shipping__section-title">Returns</h2>
-        <p>Because each piece is made to order and one of a kind, returns are not accepted unless the item arrives damaged or significantly different from its description.</p>
-        <p>If there is an issue with your order, please contact us within 7 days of delivery at <a href="mailto:contact@xvarog.com" style="text-decoration: underline;">contact@xvarog.com</a> with a photo and a description of the problem. We will find a fair solution.</p>
-      </div>
+          <div class="shipping__section">
+            <h2 class="shipping__section-title">Questions</h2>
+            <p>For anything not covered here, reach out at <a href="mailto:contact@xvarog.com" style="text-decoration: underline;">contact@xvarog.com</a>.</p>
+          </div>
 
-      <div class="shipping__section">
-        <h2 class="shipping__section-title">Custom orders</h2>
-        <p>Custom pieces are non-refundable once production has begun. All terms are agreed upon before work starts.</p>
-      </div>
+        </div>
 
-      <div class="shipping__section">
-        <h2 class="shipping__section-title">Questions</h2>
-        <p>For anything not covered here, reach out at <a href="mailto:contact@xvarog.com" style="text-decoration: underline;">contact@xvarog.com</a>.</p>
+        <div class="shipping__col">
+
+          <div class="shipping__section">
+            <h2 class="shipping__section-title">Returns</h2>
+            <p>Ready-made pieces purchased from the shop may be returned within 14 days of delivery, in unused and undamaged condition. Return shipping costs are the buyer's responsibility.</p>
+            <p>Custom-made pieces are non-refundable. Each is produced specifically for you and cannot be resold. If your custom piece arrives damaged or significantly different from what was agreed, please contact us within 14 days of delivery and we will find a fair solution.</p>
+          </div>
+
+          <div class="shipping__section">
+            <h2 class="shipping__section-title">Custom orders</h2>
+            <p>All terms for custom work are agreed upon before production begins. Once work has started, the piece cannot be cancelled or refunded unless it arrives damaged.</p>
+          </div>
+
+        </div>
       </div>
     </main>
 
