@@ -355,20 +355,25 @@
       }
 
       .archive {
-        gap: 40px;
+        gap: 24px;
         padding-top: 40px;
       }
 
       /* Top row: single column on mobile */
       .archive__row-top {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 24px;
       }
+
+      /* Reorder top row: ONCE (1st), DEAR FRIEND (2nd), SHELL (3rd) */
+      .archive__row-top .archive__item:nth-child(1) { order: 1; } /* ONCE */
+      .archive__row-top .archive__item:nth-child(2) { order: 3; } /* SHELL → last */
+      .archive__row-top .archive__item:nth-child(3) { order: 2; } /* DEAR FRIEND → second */
 
       /* Bottom section: single column */
       .archive__row-bottom {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 24px;
       }
 
       /* Extension comes before keychain/wildboar on mobile */
@@ -379,7 +384,7 @@
 
       .archive__left {
         order: 0;
-        gap: 40px;
+        gap: 24px;
       }
 
       .archive__right__img-wrap {
@@ -532,14 +537,14 @@
 
           <!-- 6. Wild boar small -->
           <div class="archive__item archive__left-bottom">
-            <a href="https://xvarog.com/wildboar">
+            <a href="https://xvarog.com/keychain"">
               <img
                 src="https://kasmeks.github.io/xvarog/images/archive-wildboar.jpg"
                 alt="WILD BOAR (KEYCHAIN) — xvarog 2025"
               />
             </a>
             <p class="archive__caption archive__caption--left">
-              <a href="https://xvarog.com/wildboar"><u>WILD BOAR (KEYCHAIN), <span class="year">2025</span></u></a>
+              <a href="https://xvarog.com/keychain"><u>WILD BOAR (KEYCHAIN), <span class="year">2025</span></u></a>
             </p>
           </div>
 
