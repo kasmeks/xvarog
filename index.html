@@ -261,6 +261,13 @@
       object-fit: contain;
     }
 
+    /* ─── Hide Klaviyo teaser on mobile/tablet ──────────────── */
+    @media (max-width: 1024px) {
+      iframe[src*="klaviyo"],
+      div[class*="klaviyo"],
+      div[id*="klaviyo"] { display: none !important; }
+    }
+
     @media (max-width: 1024px) {
       :root {
         --h-pad:      40px;
