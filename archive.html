@@ -209,8 +209,15 @@
     .archive__right {
       display: flex;
       flex-direction: column;
-      gap: 12px;
       align-self: stretch;
+    }
+
+    .archive__right .archive__item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
     }
 
     .archive__right__img-wrap {
@@ -553,17 +560,19 @@
         <!-- Right column: Extension tall -->
         <!-- On mobile: order:-1, comes before keychain/wildboar -->
         <div class="archive__right">
-          <div class="archive__right__img-wrap">
-            <a href="https://xvarog.com/extension">
-              <img
-                src="https://kasmeks.github.io/xvarog/images/archive-extension.jpg"
-                alt="EXTENSION — xvarog 2026"
-              />
-            </a>
+          <div class="archive__item">
+            <div class="archive__right__img-wrap">
+              <a href="https://xvarog.com/extension">
+                <img
+                  src="https://kasmeks.github.io/xvarog/images/archive-extension.jpg"
+                  alt="EXTENSION — xvarog 2026"
+                />
+              </a>
+            </div>
+            <p class="archive__caption archive__caption--left">
+              <a href="https://xvarog.com/extension"><u>EXTENSION, <span class="year">2026</span></u></a>
+            </p>
           </div>
-          <p class="archive__caption archive__caption--left">
-            <a href="https://xvarog.com/extension"><u>EXTENSION, <span class="year">2026</span></u></a>
-          </p>
         </div>
 
       </div>
