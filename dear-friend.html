@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DEAR FRIEND — xvarog</title>
+  <meta name="description" content="DEAR FRIEND — silver 925 pendants with freshwater pearl and human tooth, handcrafted by xvarog in Pforzheim." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -321,14 +322,7 @@
     }
 
     .product__thumbnails-track::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 60px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
+      display: none;
     }
 
     .product__thumb {
@@ -430,9 +424,10 @@
 
     .product__contact-link:hover { opacity: 0.55; }
 
-    .product__contact-link svg {
+    .product__contact-link img {
       width: 24px;
       height: 24px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 

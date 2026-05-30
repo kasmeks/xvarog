@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EXTENSION — xvarog</title>
+  <meta name="description" content="EXTENSION — white horse leather neckpiece with silver 925 clasp, handcrafted by xvarog in Pforzheim." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -320,15 +321,7 @@
     }
 
     .product__thumbnails-track::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 80px;
-      height: 100%;
-      background: linear-gradient(to right, transparent 0%, transparent 50%, #f9f9f9 100%);
-      pointer-events: none;
-      z-index: 1;
+      display: none;
     }
 
     .product__thumb {
@@ -451,6 +444,19 @@
 
       .product__viewer {
         gap: 10px;
+      }
+
+      .product__thumbnails-track::after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 100%;
+        background: linear-gradient(to right, transparent 0%, transparent 50%, #ffffff 100%);
+        pointer-events: none;
+        z-index: 1;
       }
 
       .product__meta-group {

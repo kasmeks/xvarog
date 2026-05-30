@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ONCE — xvarog</title>
+  <meta name="description" content="ONCE — brass and silver 925 earrings with white horse hair, handcrafted by xvarog in Pforzheim." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -320,15 +321,7 @@
     }
 
     .product__thumbnails-track::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 60px;
-      height: 100%;
-      background: linear-gradient(to right, transparent 0%, transparent 50%, #ffffff 100%);
-      pointer-events: none;
-      z-index: 1;
+      display: none;
     }
 
     .product__thumb {
@@ -430,9 +423,10 @@
 
     .product__contact-link:hover { opacity: 0.55; }
 
-    .product__contact-link svg {
+    .product__contact-link img {
       width: 24px;
       height: 24px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
@@ -622,20 +616,11 @@
           <p class="product__contact-label">Contact to discuss:</p>
           <div class="product__contact-links">
             <a href="mailto:contact@xvarog.com" class="product__contact-link" aria-label="Email xvarog">
-              <!-- email icon (line-md style) -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <polyline points="2,4 12,13 22,4"/>
-              </svg>
+              <img src="https://kasmeks.github.io/xvarog/images/email.png" alt="Email" />
               contact@xvarog.com
             </a>
             <a href="https://www.instagram.com/xvarog" target="_blank" rel="noopener" class="product__contact-link" aria-label="xvarog on Instagram">
-              <!-- instagram icon (line-md style) -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5"/>
-                <circle cx="12" cy="12" r="4.5"/>
-                <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"/>
-              </svg>
+              <img src="https://kasmeks.github.io/xvarog/images/instagram.png" alt="Instagram" />
               @xvarog
             </a>
           </div>
