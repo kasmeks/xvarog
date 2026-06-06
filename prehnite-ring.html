@@ -35,7 +35,6 @@
 
       /* ─── Page-specific tokens ───────────────────────────── */
       --color-meta:      #82808d;
-      --color-available: #007d0d;
       --thumb-width:     75px;
       --thumb-height:    100px;
       --thumb-gap:       14px;
@@ -388,48 +387,6 @@
     .product__meta-group {
       margin-top: 20px;
     }
-
-    .product__available {
-      margin-top: 20px;
-      font-size: var(--fs-body);
-      line-height: var(--lh-body);
-      color: var(--color-available);
-    }
-
-    .product__contact-label {
-      margin-top: 16px;
-      font-size: var(--fs-body);
-      line-height: var(--lh-body);
-      color: var(--color-text-dark);
-    }
-
-    .product__contact-links {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 0px;
-    }
-
-    .product__contact-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 4px 6px;
-      color: var(--color-text-dark);
-      font-size: var(--fs-body);
-      line-height: 27px;
-      transition: opacity 0.2s ease;
-    }
-
-    .product__contact-link:hover { opacity: 0.55; }
-
-    .product__contact-link img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
     /* ─── Tablet (≤ 1024px) ──────────────────────────────────── */
     @media (max-width: 1024px) {
       :root {
@@ -470,14 +427,6 @@
       .product {
         grid-template-columns: 1fr;
         gap: 18px;
-      }
-
-      .product__contact-label {
-        margin-top: 14px;
-      }
-
-      .product__available {
-        margin-top: 14px;
       }
 
       .product__info {
@@ -614,18 +563,7 @@
             </div>
           </div>
 
-          <p class="product__available">Available</p>
-          <p class="product__contact-label">Contact to discuss:</p>
-          <div class="product__contact-links">
-            <a href="mailto:contact@xvarog.com" class="product__contact-link" aria-label="Email xvarog">
-              <img src="https://kasmeks.github.io/xvarog/images/email.png" alt="Email" />
-              contact@xvarog.com
-            </a>
-            <a href="https://www.instagram.com/xvarog" target="_blank" rel="noopener" class="product__contact-link" aria-label="xvarog on Instagram">
-              <img src="https://kasmeks.github.io/xvarog/images/instagram.png" alt="Instagram" />
-              @xvarog
-            </a>
-          </div>
+
         </div>
 
       </div>
