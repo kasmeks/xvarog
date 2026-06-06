@@ -198,7 +198,9 @@
       line-height: 18px;
       color: var(--color-text-dark);
       white-space: nowrap;
-      padding-top: 2px;
+      margin-top: -4px;
+      .year::before { content: ' '; } 
+      a { text-decoration: underline; }
     }
 
     .archive__newest-fire-caption .year {
@@ -214,6 +216,7 @@
       font-size: var(--fs-caption);
       line-height: 16px;
       color: var(--color-text-year);
+      margin-bottom: -4px;
     }
 
     /* Ring image — far right, crops to match flatlay height */
@@ -462,6 +465,7 @@
         align-self: flex-start;
         justify-self: start;
         text-align: left;
+        margin-bottom: -24px;
       }
 
       /* Top row: single column on mobile */
@@ -591,12 +595,12 @@
 
         <!-- FIRE / BY TIME caption (in the gap) -->
         <p class="archive__newest-fire-caption">
-          <a href="https://xvarog.com/fire-by-time">BY FIRE / BY TIME,<span class="year">2026</span></a>
+          <a href="https://xvarog.com/fire-by-time"><u>BY FIRE / BY TIME,</u><span class="year">2026</span></a>
         </p>
 
         <!-- prehnite year (left of ring image) -->
         <p class="archive__newest-ring-year">
-          <a href="https://xvarog.com/prehnite-ring"><span class="year">2026</span></a>
+          <a href="https://xvarog.com/prehnite-ring"><span class="year"><u>2026</u></span></a>
         </p>
 
         <!-- Ring image (far right) -->
