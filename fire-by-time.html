@@ -262,8 +262,8 @@
     /* ─── Product layout ─────────────────────────────────────── */
     .product {
       display: grid;
-      grid-template-columns: 45% 1fr;
-      gap: 45px;
+      grid-template-columns: 38% 1fr;
+      gap: 30px;
       align-items: start;
     }
 
@@ -277,8 +277,9 @@
 
     .product__main-image {
       width: 100%;
-      overflow: hidden;
+      max-width: 520px;
       position: relative;
+      aspect-ratio: 3 / 4;
     }
 
     .product__main-image img {
