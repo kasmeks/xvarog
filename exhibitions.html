@@ -320,6 +320,10 @@
       font-weight: var(--fw-medium);
     }
 
+    .exh-nowrap {
+      white-space: nowrap;
+    }
+
     .exh-entry__photos {
       display: flex;
       gap: 12px;
@@ -394,7 +398,7 @@
 
       .exhibitions {
         flex-direction: column;
-        gap: 33px;
+        gap: 0;
         padding-top: 40px;
       }
 
@@ -404,6 +408,7 @@
         position: static;
         top: auto;
         gap: 8px;
+        margin-bottom: 25px;
       }
 
       .exh-prior {
@@ -539,7 +544,7 @@
         <!-- Entry: AUTOR -->
         <div class="exh-entry">
           <div class="exh-entry__text">
-            <p class="exh-entry__title"><strong>AUTOR Contemporary Jewelry</strong> – Selected Young Designer</p>
+            <p class="exh-entry__title"><strong>AUTOR Contemporary Jewelry</strong><span class="exh-nowrap"> – Selected Young Designer</span></p>
             <p class="exh-entry__title">15–17 May 2026 (Bucharest, Romania)</p>
           </div>
           <div class="exh-entry__photos">
