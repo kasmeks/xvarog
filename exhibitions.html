@@ -250,35 +250,35 @@
       gap: 140px;
       padding: 40px var(--h-pad) 0;
       font-size: var(--fs-exh);
-      line-height: 27px;
+      line-height: 22px;
     }
 
     /* LEFT: Following — sticky column */
     .exh-following {
       flex: 0 0 auto;
-      width: 270px;
+      width: 300px;
       position: sticky;
       top: calc(var(--nav-height) + 40px);
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 8px;
       color: var(--color-text-dark);
     }
 
     .exh-following__heading {
       font-size: var(--fs-exh);
       font-weight: var(--fw-normal);
-      line-height: 27px;
+      line-height: 22px;
     }
 
     .exh-following__event-name {
       font-weight: var(--fw-medium);
-      line-height: 27px;
+      line-height: 22px;
     }
 
     .exh-following__event-date {
       font-weight: var(--fw-normal);
-      line-height: 27px;
+      line-height: 22px;
     }
 
     /* RIGHT: Prior column */
@@ -287,27 +287,33 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 8px;
       color: var(--color-text-dark);
     }
 
     .exh-prior__heading {
       font-size: var(--fs-exh);
       font-weight: var(--fw-normal);
-      line-height: 27px;
+      line-height: 22px;
     }
 
     .exh-entry {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 8px;
       min-width: 0;
       width: 100%;
     }
 
+    .exh-entry__text {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
     .exh-entry__title {
       font-size: var(--fs-exh);
-      line-height: 27px;
+      line-height: 22px;
     }
 
     .exh-entry__title strong {
@@ -388,7 +394,7 @@
 
       .exhibitions {
         flex-direction: column;
-        gap: 24px;
+        gap: 33px;
         padding-top: 40px;
       }
 
@@ -397,11 +403,11 @@
         width: 100%;
         position: static;
         top: auto;
-        gap: 16px;
+        gap: 8px;
       }
 
       .exh-prior {
-        gap: 40px;
+        gap: 8px;
       }
 
       .exh-entry {
@@ -532,10 +538,10 @@
 
         <!-- Entry: AUTOR -->
         <div class="exh-entry">
-          <p class="exh-entry__title">
-            <strong>AUTOR Contemporary Jewelry</strong> – Selected Young Designer<br>
-            15–17 May 2026 (Bucharest, Romania)
-          </p>
+          <div class="exh-entry__text">
+            <p class="exh-entry__title"><strong>AUTOR Contemporary Jewelry</strong> – Selected Young Designer</p>
+            <p class="exh-entry__title">15–17 May 2026 (Bucharest, Romania)</p>
+          </div>
           <div class="exh-entry__photos">
             <!-- Photo 1: portrait (shown on mobile by default) -->
             <div class="exh-photo--portrait">
