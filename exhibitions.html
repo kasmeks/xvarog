@@ -23,7 +23,7 @@
 
       --fs-nav:          14px;
       --fs-body:         15px;
-      --fs-exh:          16px;
+      --fs-exh:          15px;
       --fs-footer:       12px;
 
       --lh-body:         22px;
@@ -248,7 +248,7 @@
       display: flex;
       align-items: flex-start;
       gap: 140px;
-      padding: 60px var(--h-pad) 0;
+      padding: 40px var(--h-pad) 0;
       font-size: var(--fs-exh);
       line-height: 27px;
     }
@@ -256,9 +256,9 @@
     /* LEFT: Following — sticky column */
     .exh-following {
       flex: 0 0 auto;
-      width: 280px;
+      width: 270px;
       position: sticky;
-      top: calc(var(--nav-height) + 60px);
+      top: calc(var(--nav-height) + 40px);
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -284,6 +284,7 @@
     /* RIGHT: Prior column */
     .exh-prior {
       flex: 1;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -300,6 +301,8 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      min-width: 0;
+      width: 100%;
     }
 
     .exh-entry__title {
@@ -315,12 +318,14 @@
       display: flex;
       gap: 12px;
       align-items: flex-start;
+      min-width: 0;
+      width: 100%;
     }
 
-    /* Portrait photo: 343px wide → renders 457px tall (3:4 ratio) */
+    /* Portrait: 3:4 image, flex weight 343 out of 952 total */
     .exh-photo--portrait {
-      width: 343px;
-      flex-shrink: 0;
+      flex: 343 343 0;
+      min-width: 0;
     }
 
     .exh-photo--portrait img {
@@ -329,10 +334,10 @@
       display: block;
     }
 
-    /* Landscape photo: 609px wide → renders 457px tall (4:3 ratio) */
+    /* Landscape: 4:3 image, flex weight 609 out of 952 total */
     .exh-photo--landscape {
-      width: 609px;
-      flex-shrink: 0;
+      flex: 609 609 0;
+      min-width: 0;
     }
 
     .exh-photo--landscape img {
@@ -368,12 +373,9 @@
       }
 
       .exh-following {
-        width: 220px;
+        width: 280px;
       }
 
-      .exh-photo--portrait {
-        width: 260px;
-      }
     }
 
     /* ─── Mobile (≤ 768px) ───────────────────────────────────── */
@@ -386,8 +388,8 @@
 
       .exhibitions {
         flex-direction: column;
-        gap: 40px;
-        padding-top: 32px;
+        gap: 24px;
+        padding-top: 40px;
       }
 
       /* On mobile, Following is NOT sticky — just flows normally */
@@ -399,7 +401,7 @@
       }
 
       .exh-prior {
-        gap: 16px;
+        gap: 40px;
       }
 
       .exh-entry {
