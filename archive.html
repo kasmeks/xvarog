@@ -167,12 +167,49 @@
     .archive__caption--right { text-align: right; }
     .archive__caption--left  { text-align: left; }
 
+    /* ── Row hero: FEATHER (left) + FANG (right) ── */
+    /* Figma: 981 : 658 columns, equal height (1029), 81px gap */
+    .archive__row-hero {
+      display: grid;
+      grid-template-columns: 981fr 658fr;
+      column-gap: var(--col-gap);
+      align-items: stretch;
+      /* vertical gap to next row = col-gap (43px = 8 img-caption gap + 16 caption + 19 flex gap) */
+      margin-bottom: calc(var(--col-gap) - 43px);
+    }
+
+    .archive__row-hero .archive__item { min-width: 0; }
+
+    /* Left image sets the row height via its natural ratio */
+    .archive__row-hero .archive__item:first-child img {
+      aspect-ratio: 981 / 1029;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Right image fills whatever height the left one sets */
+    .archive__hero-img-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .archive__row-hero .archive__hero-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
     /* ── Row newest: FIRE/BY TIME (left) + prehnite ring (right) ── */
     /* Layout mirrors Figma: narrow flatlay → caption in gap → year → wide ring image.
        Columns: flatlay (auto from its own width) | caption text | year text | ring image */
     .archive__row-newest {
       display: grid;
-      grid-template-columns: 36% auto 1fr 47%;
+      grid-template-columns: 36% auto 1fr 49.3%;
       column-gap: 12px;
       align-items: stretch;
       margin-bottom: 25px;
@@ -198,7 +235,7 @@
       line-height: 18px;
       color: var(--color-text-dark);
       white-space: nowrap;
-      margin-top: -4px;
+      margin-top: -3px;
       .year::before { content: ' '; } 
       a { text-decoration: underline; }
     }
@@ -434,6 +471,26 @@
         padding-top: 40px;
       }
 
+      /* Hero row: stack FEATHER, then FANG */
+      .archive__row-hero {
+        grid-template-columns: 1fr;
+        row-gap: 24px;
+        margin-bottom: 0;
+      }
+
+      .archive__row-hero .archive__item:first-child img {
+        aspect-ratio: auto;
+      }
+
+      .archive__hero-img-wrap {
+        flex: none;
+      }
+
+      .archive__row-hero .archive__hero-img-wrap img {
+        position: static;
+        height: auto;
+      }
+
       /* Newest row: stack into two items on mobile */
       .archive__row-newest {
         display: flex;
@@ -581,6 +638,37 @@
 
     <!-- Archive content -->
     <main class="archive">
+
+      <!-- Row hero: FEATHER + FANG -->
+      <div class="archive__row-hero">
+
+        <div class="archive__item">
+          <a href="https://xvarog.com/feather">
+            <img
+              src="https://kasmeks.github.io/xvarog/images/horsehair-pendant-garnet-necklace.jpg"
+              alt="FEATHER — xvarog 2026"
+            />
+          </a>
+          <p class="archive__caption archive__caption--right">
+            <a href="https://xvarog.com/feather"><u>FEATHER, <span class="year">2026</span></u></a>
+          </p>
+        </div>
+
+        <div class="archive__item">
+          <div class="archive__hero-img-wrap">
+            <a href="https://xvarog.com/fang">
+              <img
+                src="https://kasmeks.github.io/xvarog/images/fang-earrings-silver-worn.jpg"
+                alt="FANG — xvarog 2026"
+              />
+            </a>
+          </div>
+          <p class="archive__caption archive__caption--right">
+            <a href="https://xvarog.com/fang"><u>FANG, <span class="year">2026</span></u></a>
+          </p>
+        </div>
+
+      </div>
 
       <!-- Row newest: FIRE / BY TIME + prehnite ring -->
       <div class="archive__row-newest">
